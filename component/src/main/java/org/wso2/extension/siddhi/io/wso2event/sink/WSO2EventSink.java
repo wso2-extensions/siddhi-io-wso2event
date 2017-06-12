@@ -57,7 +57,7 @@ public class WSO2EventSink extends Sink {
     private static final Logger log = Logger.getLogger(WSO2EventSink.class);
     private DataPublisher dataPublisher;
     private String authUrl;
-    private String tcpUrl;
+    private String url;
     private String username;
     private String password;
     private String publisherMode;
@@ -71,7 +71,7 @@ public class WSO2EventSink extends Sink {
                         ConfigReader sinkConfigReader, ExecutionPlanContext executionPlanContext) {
         this.authUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_AUTHENTICATION_URL,
                 null);
-        this.tcpUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
+        this.url = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
         this.username = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_USERNAME);
         this.password = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_PASSWORD);
         this.publisherMode = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.
@@ -91,31 +91,31 @@ public class WSO2EventSink extends Sink {
     @Override
     public void connect() throws ConnectionUnavailableException {
         try {
-            dataPublisher = new DataPublisher(protocol, tcpUrl, authUrl, username, password);
+            dataPublisher = new DataPublisher(protocol, url, authUrl, username, password);
         } catch (DataEndpointAgentConfigurationException e) {
             throw new ConnectionUnavailableException(
                     "Error in event sink data-bridge client configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointException e) {
             throw new ConnectionUnavailableException(
                     "Error in connecting to databridge endpoint configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointConfigurationException e) {
             throw new ConnectionUnavailableException(
                     "Error in databridge endpoint configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointAuthenticationException e) {
             throw new ConnectionUnavailableException(
                     "Error while authenticating to databridge endpoint given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (TransportException e) {
             throw new ConnectionUnavailableException(
                     "Transport exception occurred when connecting to databridge endpoint given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         }
 
@@ -141,7 +141,7 @@ public class WSO2EventSink extends Sink {
                 dataPublisher.shutdown();
             } catch (DataEndpointException e) {
                 log.error("Error in shutting down the data publisher created for execution plan " +
-                        executionPlanName + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" +
+                        executionPlanName + " with the url:" + url + " authUrl:" + authUrl + " protocol:" +
                         protocol + " and userName:" + username + "," + e.getMessage(), e);
             }
         }
