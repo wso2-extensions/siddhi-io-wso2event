@@ -35,8 +35,12 @@ import java.util.Map;
 @Extension(
         name = "wso2event",
         namespace = "source",
-        description = "WSO2Event Receiver which consumes events through databridge transport",
-        examples = @Example(description = "TBD", syntax = "TBD")
+        description = "The WSO2Event source receives wso2events via TCP (databridge) in `wso2event` format. " +
+                "You can receive wso2events through `Thrift` or `Binary` protocols.",
+        examples = @Example(syntax =
+                "@source(type='wso2event', @map(type='wso2event', wso2.stream.id='inputstream:1.0.0'))\n" +
+                        "Define stream Foo (symbol string, price float, volume long);",
+                description = "As defined in above query events are received to stream id that defined in mapping.")
 )
 public class WSO2EventSource extends Source {
 

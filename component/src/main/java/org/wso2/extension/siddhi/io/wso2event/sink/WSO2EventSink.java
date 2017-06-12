@@ -44,8 +44,13 @@ import java.util.Map;
 @Extension(
         name = "wso2event",
         namespace = "sink",
-        description = "WSO2Event Publisher which pushes events to databridge Thrift/Binary server",
-        examples = @Example(description = "TBD", syntax = "TBD")
+        description = "The WSO2Event source pushes wso2events via TCP (databridge) in `wso2event` format. " +
+                "You can send wso2events through `Thrift` or `Binary` protocols.",
+        examples = @Example(syntax = "@sink(type='wso2event', url=\"tcp://localhost:7611\", " +
+                "auth.url=\"ssl://localhost:7711\", protocol=\"thrift\", username=\"admin\", password=\"admin\", " +
+                "mode=\"non-blocking\" , @map(type='wso2event',  wso2.stream.id='fooStream:1.0.0'))\n" +
+                "Define stream barStream(system string, price float, volume long);",
+                description = "As defined in above query events are pushed to destination that defined.")
 )
 public class WSO2EventSink extends Sink {
 
