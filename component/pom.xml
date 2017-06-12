@@ -30,7 +30,7 @@
     <packaging>bundle</packaging>
 
     <artifactId>siddhi-io-wso2event</artifactId>
-    <name>Siddhi Extension - WSO2Event IO Transport</name>
+    <name>Siddhi Extension - WSO2Event IO</name>
 
 
     <dependencies>

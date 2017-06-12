@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.extension.siddhi.io.wso2event;
+package org.wso2.extension.siddhi.io.wso2event.sink;
 
 import org.apache.log4j.Logger;
 import org.wso2.carbon.databridge.agent.DataPublisher;
@@ -66,7 +66,7 @@ public class WSO2EventSink extends Sink {
                         ConfigReader sinkConfigReader, ExecutionPlanContext executionPlanContext) {
         this.authUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_AUTHENTICATION_URL,
                 null);
-        this.tcpUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_TCP_URL);
+        this.tcpUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
         this.username = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_USERNAME);
         this.password = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_PASSWORD);
         this.publisherMode = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.

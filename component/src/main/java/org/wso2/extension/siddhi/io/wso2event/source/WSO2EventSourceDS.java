@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.extension.siddhi.io.wso2event;
+package org.wso2.extension.siddhi.io.wso2event.source;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,7 +40,7 @@ import java.util.List;
  * Service component to consume DataBridgeReceiver Service.
  */
 @Component(
-        name = "org.wso2.extension.siddhi.io.wso2event.WSO2EventSourceDS",
+        name = "org.wso2.extension.siddhi.io.wso2event.source.WSO2EventSourceDS",
         immediate = true
 )
 public class WSO2EventSourceDS {
