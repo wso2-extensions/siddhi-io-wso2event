@@ -16,11 +16,22 @@
  * under the License.
  */
 
-package org.wso2.extension.siddhi.output.transport.wso2event;
+package org.wso2.extension.siddhi.io.wso2event;
 
-import org.apache.log4j.Logger;
 
-public class WSO2EventSinkTestCase {
-    static final Logger LOG = Logger.getLogger(WSO2EventSinkTestCase.class);
+/**
+ * WSO2EventSource related constants
+ */
+public class WSO2EventSourceConstants {
 
+    private WSO2EventSourceConstants() {
+    }
+
+    public static final String SOURCE_TYPE_WSO2EVENT = "wso2event";
+    public static final String SOURCE_STREAM_ID = "stream.id";
+    public static final String SOURCE_USAGE_TIPS_PREFIX = "wso2event.usage.tips_prefix";
+    public static final int DEFAULT_THRIFT_TCP_PORT = 7611;
+    public static final int DEFAULT_THRIFT_SSL_PORT = 7711;
+    public static final int DEFAULT_BINARY_TCP_PORT = 9611;
+    public static final int DEFAULT_BINARY_SSL_PORT = 9711;
 }
