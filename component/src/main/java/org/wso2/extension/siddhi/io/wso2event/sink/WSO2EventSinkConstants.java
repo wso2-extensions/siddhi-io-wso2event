@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.extension.siddhi.io.wso2event;
+package org.wso2.extension.siddhi.io.wso2event.sink;
 
 
 /**
@@ -28,7 +28,7 @@ public class WSO2EventSinkConstants {
     }
 
     public static final String WSO2EVENT_SINK_AUTHENTICATION_URL = "auth.url";
-    public static final String WSO2EVENT_SINK_TCP_URL = "tcp.url";
+    public static final String WSO2EVENT_SINK_URL = "url";
     public static final String WSO2EVENT_SINK_TYPE = "type";
     public static final String WSO2EVENT_SINK_USERNAME = "username";
     public static final String WSO2EVENT_SINK_PASSWORD = "password";
