@@ -27,7 +27,7 @@
     <packaging>pom</packaging>
 
     <groupId>org.wso2.extension.siddhi</groupId>
-    <artifactId>siddhi-io-wso2event</artifactId>
+    <artifactId>siddhi-io-wso2event-parent</artifactId>
     <version>4.0.0-M5-SNAPSHOT</version>
     <name>Siddhi IO WSO2Event Extensions</name>
 
@@ -38,8 +38,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <modules>
-                <module>component/input-transport</module>
-                <module>component/output-transport</module>
+                <module>component</module>
             </modules>
         </profile>
     </profiles>

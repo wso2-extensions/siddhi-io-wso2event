@@ -18,18 +18,19 @@
   ~ under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.extension.siddhi</groupId>
-        <artifactId>siddhi-io-wso2event</artifactId>
+        <artifactId>siddhi-io-wso2event-parent</artifactId>
         <version>4.0.0-M5-SNAPSHOT</version>
-        <relativePath>../../pom.xml</relativePath>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>bundle</packaging>
 
-    <artifactId>siddhi-io-wso2event-output</artifactId>
-    <name>Siddhi Extension - WSO2Event Output Transport</name>
+    <artifactId>siddhi-io-wso2event</artifactId>
+    <name>Siddhi Extension - WSO2Event IO Transport</name>
 
 
     <dependencies>
@@ -77,7 +78,6 @@
             <artifactId>org.wso2.carbon.databridge.agent</artifactId>
         </dependency>
 
-
     </dependencies>
 
     <build>
@@ -91,7 +91,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            org.wso2.extension.siddhi.output.transport.wso2event.*
+                            org.wso2.extension.siddhi.io.wso2event.*
                         </Export-Package>
                         <Import-Package>
                             *;resolution:=optional
