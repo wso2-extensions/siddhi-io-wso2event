@@ -28,10 +28,5 @@ public class WSO2EventSourceConstants {
     }
 
     public static final String SOURCE_TYPE_WSO2EVENT = "wso2event";
-    public static final String SOURCE_STREAM_ID = "stream.id";
-    public static final String SOURCE_USAGE_TIPS_PREFIX = "wso2event.usage.tips_prefix";
-    public static final int DEFAULT_THRIFT_TCP_PORT = 7611;
-    public static final int DEFAULT_THRIFT_SSL_PORT = 7711;
-    public static final int DEFAULT_BINARY_TCP_PORT = 9611;
-    public static final int DEFAULT_BINARY_SSL_PORT = 9711;
+    public static final String SOURCE_STREAM_ID = "wso2.stream.id";
 }

@@ -28,6 +28,8 @@ import org.wso2.carbon.databridge.commons.Event;
 import org.wso2.carbon.databridge.commons.exception.TransportException;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
+import org.wso2.siddhi.annotation.Parameter;
+import org.wso2.siddhi.annotation.util.DataType;
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
 import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
 import org.wso2.siddhi.core.stream.output.sink.Sink;
@@ -44,15 +46,43 @@ import java.util.Map;
 @Extension(
         name = "wso2event",
         namespace = "sink",
-        description = "WSO2Event Publisher which pushes events to databridge Thrift/Binary server",
-        examples = @Example(description = "TBD", syntax = "TBD")
+        description = "The WSO2Event source pushes wso2events via TCP (databridge) in `wso2event` format. " +
+                "You can send wso2events through `Thrift` or `Binary` protocols.",
+        examples = @Example(syntax = "@sink(type='wso2event', url=\"tcp://localhost:7611\", " +
+                "auth.url=\"ssl://localhost:7711\", protocol=\"thrift\", username=\"admin\", password=\"admin\", " +
+                "mode=\"non-blocking\" , @map(type='wso2event',  wso2.stream.id='fooStream:1.0.0'))\n" +
+                "Define stream barStream(system string, price float, volume long);",
+                description = "As defined in above query events are pushed to destination that defined."),
+        parameters = {
+                @Parameter(name = "url", description = "The URL to which the outgoing events published via " +
+                        "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
+                        type = {DataType.STRING}),
+                @Parameter(name = "auth.url", description = "The Thrift/Binary server endpoint url which used fot " +
+                        "authentication purposes. It is not mandatory property. If this property is not provided " +
+                        "then tcp-port+100 used for port in auth.url. " +
+                        "e.g., `ssl://localhost:7711`", type = {DataType.STRING}, optional = true),
+                @Parameter(name = "username", description = "The username is used for authentication flow before " +
+                        "publishing events" +
+                        "e.g., `admin`", type = {DataType.STRING}),
+                @Parameter(name = "password", description = "The password is used for authentication flow before " +
+                        "publishing events" +
+                        "e.g., `admin`", type = {DataType.STRING}),
+                @Parameter(name = "protocol", description = "There are two protocols that we can use to publish " +
+                        "events through data bridge.Either, we can use thrift or binary. Default value is Thrift" +
+                        "e.g., `thrift`",
+                        type = {DataType.STRING},
+                        optional = true),
+                @Parameter(name = "mode", description = "Property which decides whether to publish events in " +
+                        "synchronous or asynchronous mode. Default is non-blocking mode." +
+                        "e.g., `blocking`",
+                        type = {DataType.STRING}, optional = true)}
 )
 public class WSO2EventSink extends Sink {
 
     private static final Logger log = Logger.getLogger(WSO2EventSink.class);
     private DataPublisher dataPublisher;
     private String authUrl;
-    private String tcpUrl;
+    private String url;
     private String username;
     private String password;
     private String publisherMode;
@@ -66,7 +96,7 @@ public class WSO2EventSink extends Sink {
                         ConfigReader sinkConfigReader, ExecutionPlanContext executionPlanContext) {
         this.authUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_AUTHENTICATION_URL,
                 null);
-        this.tcpUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
+        this.url = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
         this.username = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_USERNAME);
         this.password = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_PASSWORD);
         this.publisherMode = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.
@@ -86,31 +116,31 @@ public class WSO2EventSink extends Sink {
     @Override
     public void connect() throws ConnectionUnavailableException {
         try {
-            dataPublisher = new DataPublisher(protocol, tcpUrl, authUrl, username, password);
+            dataPublisher = new DataPublisher(protocol, url, authUrl, username, password);
         } catch (DataEndpointAgentConfigurationException e) {
             throw new ConnectionUnavailableException(
                     "Error in event sink data-bridge client configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointException e) {
             throw new ConnectionUnavailableException(
                     "Error in connecting to databridge endpoint configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointConfigurationException e) {
             throw new ConnectionUnavailableException(
                     "Error in databridge endpoint configuration given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointAuthenticationException e) {
             throw new ConnectionUnavailableException(
                     "Error while authenticating to databridge endpoint given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (TransportException e) {
             throw new ConnectionUnavailableException(
                     "Transport exception occurred when connecting to databridge endpoint given in " + executionPlanName
-                            + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" + protocol
+                            + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         }
 
@@ -136,7 +166,7 @@ public class WSO2EventSink extends Sink {
                 dataPublisher.shutdown();
             } catch (DataEndpointException e) {
                 log.error("Error in shutting down the data publisher created for execution plan " +
-                        executionPlanName + " with the tcpUrl:" + tcpUrl + " authUrl:" + authUrl + " protocol:" +
+                        executionPlanName + " with the url:" + url + " authUrl:" + authUrl + " protocol:" +
                         protocol + " and userName:" + username + "," + e.getMessage(), e);
             }
         }
