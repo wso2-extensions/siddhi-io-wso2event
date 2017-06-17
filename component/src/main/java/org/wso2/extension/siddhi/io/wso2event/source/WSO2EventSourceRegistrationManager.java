@@ -18,7 +18,9 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
+import org.wso2.carbon.databridge.core.DataBridgeEventStreamService;
 import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
+import org.wso2.extension.siddhi.map.wso2event.service.WSO2EventMappingServiceImpl;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.util.ArrayList;
@@ -32,6 +34,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class WSO2EventSourceRegistrationManager {
 
     private static DataBridgeSubscriberService dataBridgeSubscriberService;
+    private static DataBridgeEventStreamService dataBridgeEventStreamService;
+    private static WSO2EventMappingServiceImpl wso2EventMappingService;
 
     private static Map<String, List<SourceEventListener>> streamSpecificEventListenerMap = new ConcurrentHashMap<>();
 
@@ -41,6 +45,14 @@ public class WSO2EventSourceRegistrationManager {
 
     public static void setDataBridgeSubscriberService(DataBridgeSubscriberService dataBridgeSubscriberService) {
         WSO2EventSourceRegistrationManager.dataBridgeSubscriberService = dataBridgeSubscriberService;
+    }
+
+    public static WSO2EventMappingServiceImpl getWso2EventMappingService() {
+        return wso2EventMappingService;
+    }
+
+    public static void setWso2EventMappingService(WSO2EventMappingServiceImpl wso2EventMappingService) {
+        WSO2EventSourceRegistrationManager.wso2EventMappingService = wso2EventMappingService;
     }
 
     public static Map<String, List<SourceEventListener>> getStreamSpecificEventListenerMap() {
@@ -59,6 +71,14 @@ public class WSO2EventSourceRegistrationManager {
         sourceEventListenerList.add(sourceEventListener);
     }
 
+    public static DataBridgeEventStreamService getDataBridgeEventStreamService() {
+        return dataBridgeEventStreamService;
+    }
+
+    public static void setDataBridgeEventStreamService(DataBridgeEventStreamService dataBridgeEventStreamService) {
+        WSO2EventSourceRegistrationManager.dataBridgeEventStreamService = dataBridgeEventStreamService;
+    }
+
     public static void unregisterEventConsumer(String streamId, SourceEventListener sourceEventListener) {
 
         List<SourceEventListener> sourceEventListenerList = streamSpecificEventListenerMap.get(streamId);
@@ -66,6 +86,4 @@ public class WSO2EventSourceRegistrationManager {
             sourceEventListenerList.remove(sourceEventListener);
         }
     }
-
-
 }

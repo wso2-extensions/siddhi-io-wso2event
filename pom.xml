@@ -51,7 +51,7 @@
         <curator-test.version>2.7.1</curator-test.version>
         <zookeeper.version>3.4.0</zookeeper.version>
         <commons-io.version>2.5</commons-io.version>
-        <carbon.analytics.version>2.0.18-SNAPSHOT</carbon.analytics.version>
+        <carbon.analytics.version>2.0.31-SNAPSHOT</carbon.analytics.version>
     </properties>
 
     <scm>
@@ -149,7 +149,11 @@
                 <artifactId>org.wso2.carbon.databridge.agent</artifactId>
                 <version>${carbon.analytics.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.wso2.extension.siddhi.map.wso2event</groupId>
+                <artifactId>siddhi-map-wso2event</artifactId>
+                <version>4.0.0-M5-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

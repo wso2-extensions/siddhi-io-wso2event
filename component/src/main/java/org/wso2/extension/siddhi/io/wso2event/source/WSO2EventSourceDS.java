@@ -31,7 +31,9 @@ import org.wso2.carbon.databridge.commons.Credentials;
 import org.wso2.carbon.databridge.commons.Event;
 import org.wso2.carbon.databridge.commons.StreamDefinition;
 import org.wso2.carbon.databridge.core.AgentCallback;
+import org.wso2.carbon.databridge.core.DataBridgeEventStreamService;
 import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
+import org.wso2.extension.siddhi.map.wso2event.service.WSO2EventMappingServiceImpl;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.util.List;
@@ -102,6 +104,60 @@ public class WSO2EventSourceDS {
      */
     protected void unsetDataBridgeSubscriberService(DataBridgeSubscriberService dataBridgeSubscriberService) {
         WSO2EventSourceRegistrationManager.setDataBridgeSubscriberService(null);
+    }
+
+    /**
+     * This bind method will be called when DataBridgeEventStreamService OSGi service is registered.
+     *
+     * @param dataBridgeEventStreamService The DataBridgeEventStreamService instance registered by databridge
+     *                                    as an OSGi service
+     */
+    @Reference(
+            name = "databridge.event.stream.service",
+            service = DataBridgeEventStreamService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetDataBridgeEventStreamService"
+    )
+    protected void setDataBridgeEventStreamService(DataBridgeEventStreamService dataBridgeEventStreamService) {
+        WSO2EventSourceRegistrationManager.setDataBridgeEventStreamService(dataBridgeEventStreamService);
+    }
+
+    /**
+     * This is the unbind method which gets called at the un-registration of DataBridgeEventStreamService OSGi service.
+     *
+     * @param dataBridgeEventStreamService The DataBridgeEventStreamService instance registered by databridge
+     *                                    as an OSGi service
+     */
+    protected void unsetDataBridgeEventStreamService(DataBridgeEventStreamService dataBridgeEventStreamService) {
+        WSO2EventSourceRegistrationManager.setDataBridgeEventStreamService(null);
+    }
+
+    /**
+     * This bind method will be called when WSO2EventMappingServiceImpl OSGi service is registered.
+     *
+     * @param wso2EventMappingService The WSO2EventMappingService instance registered by siddhi-map-wso2event
+     *                                    as an OSGi service
+     */
+    @Reference(
+            name = "wso2Event.mapping.service",
+            service = WSO2EventMappingServiceImpl.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetWSO2EventMappingService"
+    )
+    protected void setWSO2EventMappingService(WSO2EventMappingServiceImpl wso2EventMappingService) {
+        WSO2EventSourceRegistrationManager.setWso2EventMappingService(wso2EventMappingService);
+    }
+
+    /**
+     * This is the unbind method which gets called at the un-registration of WSO2EventMappingService OSGi service.
+     *
+     * @param wso2EventMappingService The WSO2EventMappingService instance registered by siddhi-map-wso2event
+     *                                    as an OSGi service
+     */
+    protected void unsetWSO2EventMappingService(WSO2EventMappingServiceImpl wso2EventMappingService) {
+        WSO2EventSourceRegistrationManager.setWso2EventMappingService(null);
     }
 
 
