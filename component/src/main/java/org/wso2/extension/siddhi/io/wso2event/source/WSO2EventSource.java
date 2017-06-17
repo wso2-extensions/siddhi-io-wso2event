@@ -18,6 +18,8 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
+import org.wso2.carbon.databridge.commons.StreamDefinition;
+import org.wso2.extension.siddhi.map.wso2event.WSO2SourceMapper;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
 import org.wso2.siddhi.core.config.ExecutionPlanContext;
@@ -58,9 +60,11 @@ public class WSO2EventSource extends Source {
 
     @Override
     public void connect() throws ConnectionUnavailableException {
-        String streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID);
+        String streamId = ((WSO2SourceMapper) sourceEventListener).getInputStreamId();
+        StreamDefinition streamDefinition = WSO2EventSourceRegistrationManager.getWso2EventMappingService().
+                getStreamDefinition(streamId);
+        WSO2EventSourceRegistrationManager.getDataBridgeEventStreamService().addStreamDefinition(streamDefinition);
         WSO2EventSourceRegistrationManager.registerEventConsumer(streamId, sourceEventListener);
-
     }
 
     @Override
