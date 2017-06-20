@@ -87,7 +87,7 @@ public class WSO2EventSink extends Sink {
     private String password;
     private String publisherMode;
     private String protocol;
-    private String executionPlanName;
+    private String siddhiAppName;
     private int timeout;
 
 
@@ -110,7 +110,7 @@ public class WSO2EventSink extends Sink {
             this.timeout = Integer.parseInt(timeoutAsString);
         }
 
-        executionPlanName = executionPlanContext.getName();
+        siddhiAppName = executionPlanContext.getName();
     }
 
     @Override
@@ -119,27 +119,27 @@ public class WSO2EventSink extends Sink {
             dataPublisher = new DataPublisher(protocol, url, authUrl, username, password);
         } catch (DataEndpointAgentConfigurationException e) {
             throw new ConnectionUnavailableException(
-                    "Error in event sink data-bridge client configuration given in " + executionPlanName
+                    "Error in event sink data-bridge client configuration given in " + siddhiAppName
                             + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointException e) {
             throw new ConnectionUnavailableException(
-                    "Error in connecting to databridge endpoint configuration given in " + executionPlanName
+                    "Error in connecting to databridge endpoint configuration given in " + siddhiAppName
                             + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointConfigurationException e) {
             throw new ConnectionUnavailableException(
-                    "Error in databridge endpoint configuration given in " + executionPlanName
+                    "Error in databridge endpoint configuration given in " + siddhiAppName
                             + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (DataEndpointAuthenticationException e) {
             throw new ConnectionUnavailableException(
-                    "Error while authenticating to databridge endpoint given in " + executionPlanName
+                    "Error while authenticating to databridge endpoint given in " + siddhiAppName
                             + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         } catch (TransportException e) {
             throw new ConnectionUnavailableException(
-                    "Transport exception occurred when connecting to databridge endpoint given in " + executionPlanName
+                    "Transport exception occurred when connecting to databridge endpoint given in " + siddhiAppName
                             + " with the url:" + url + " authUrl:" + authUrl + " protocol:" + protocol
                             + " and userName:" + username + "," + e.getMessage(), e);
         }
@@ -153,7 +153,7 @@ public class WSO2EventSink extends Sink {
             dataPublisher.publish(event);
         } else {
             if (!dataPublisher.tryPublish(event, timeout)) {
-                log.error("Event dropped at WSO2Event sink in executionplan '" + executionPlanName +
+                log.error("Event dropped at WSO2Event sink in executionplan '" + siddhiAppName +
                         " , dropping event: " + event);
             }
         }
@@ -166,7 +166,7 @@ public class WSO2EventSink extends Sink {
                 dataPublisher.shutdown();
             } catch (DataEndpointException e) {
                 log.error("Error in shutting down the data publisher created for execution plan " +
-                        executionPlanName + " with the url:" + url + " authUrl:" + authUrl + " protocol:" +
+                        siddhiAppName + " with the url:" + url + " authUrl:" + authUrl + " protocol:" +
                         protocol + " and userName:" + username + "," + e.getMessage(), e);
             }
         }

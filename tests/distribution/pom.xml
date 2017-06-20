@@ -156,6 +156,20 @@
             <artifactId>org.wso2.carbon.pax.exam.feature</artifactId>
             <type>zip</type>
         </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <classifier>runtime</classifier>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-log4j2</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -352,7 +366,7 @@
                             </productConfigurationFile>
                             <repositoryURL>file:${basedir}/target/p2-repo</repositoryURL>
                             <targetPath>
-                                file:${basedir}/target/carbon-analytics/wso2
+                                file:${basedir}/target/siddhi-io-wso2event/wso2
                             </targetPath>
                             <runtime>worker</runtime>
                         </configuration>
@@ -367,7 +381,7 @@
                             <runtime>worker</runtime>
                             <repositoryURL>file:${basedir}/target/p2-repo</repositoryURL>
                             <destination>
-                                ${basedir}/target/carbon-analytics/wso2
+                                ${basedir}/target/siddhi-io-wso2event/wso2
                             </destination>
                             <deleteOldRuntimeFiles>true</deleteOldRuntimeFiles>
                             <features>
@@ -464,7 +478,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace dir="target/carbon-analytics/wso2" token="false" value="true">
+                                <replace dir="target/siddhi-io-wso2event/wso2" token="false" value="true">
                                     <include name="**/bundles.info" />
                                 </replace>
                             </tasks>
@@ -484,7 +498,7 @@
                                 <delete dir="target/p2-repo" />
                                 <!-- Figure out a way to delete tmp.* files -->
                                 <delete file="target/tmp" />
-                                <delete dir="target/carbon-analytics" />
+                                <!--<delete dir="target/siddhi-io-wso2event" />-->
                                 <delete dir="target/antrun" />
                             </target>
                         </configuration>
@@ -513,16 +527,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
-        <resources>
-            <resource>
-                <directory>carbon-home/bin/</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/version.txt</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
