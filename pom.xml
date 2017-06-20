@@ -31,21 +31,15 @@
     <version>4.0.0-M5-SNAPSHOT</version>
     <name>Siddhi IO WSO2Event Extensions</name>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>component</module>
-                <module>tests</module>
-            </modules>
-        </profile>
-    </profiles>
+    <modules>
+        <module>component</module>
+        <module>tests</module>
+    </modules>
 
     <properties>
         <siddhi.version>4.0.0-M5-SNAPSHOT</siddhi.version>
+        <siddhi.io.wso2event.version>4.0.0-M5-SNAPSHOT</siddhi.io.wso2event.version>
+        <siddhi.map.wso2event.version>4.0.0-M5-SNAPSHOT</siddhi.map.wso2event.version>
         <carbon.kernel.version>5.2.0-m3</carbon.kernel.version>
         <log4j.version>1.2.17.wso2v1</log4j.version>
         <junit.version>4.12</junit.version>
@@ -64,6 +58,23 @@
         <carbon.deployment.version>5.1.0</carbon.deployment.version>
         <carbon.security.caas.version>1.0.2-m1</carbon.security.caas.version>
         <carbon.feature.plugin.version>3.0.0</carbon.feature.plugin.version>
+
+        <!--pax-exam dependencies-->
+        <javax.inject.version>1</javax.inject.version>
+        <pax.exam.version>4.6.0</pax.exam.version>
+        <pax.exam.testng.version>4.6.0</pax.exam.testng.version>
+        <pax.exam.link.mvn.version>4.6.0</pax.exam.link.mvn.version>
+        <ow2.jta.spec.version>1.0.12</ow2.jta.spec.version>
+        <jacoco.version>0.7.5.201505241946</jacoco.version>
+        <maven.paxexam.plugin.version>1.2.4</maven.paxexam.plugin.version>
+        <mockito.version>1.9.0</mockito.version>
+        <pax.logging.log4j2.version>1.8.5</pax.logging.log4j2.version>
+        <pax.exam.container.native.version>4.6.0</pax.exam.container.native.version>
+        <pax.url.aether.version>1.6.0</pax.url.aether.version>
+        <org.jacoco.ant.version>0.7.5.201505241946</org.jacoco.ant.version>
+        <testng.version>6.9.4</testng.version>
+        <wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
+        <slf4j.version>1.7.12</slf4j.version>
     </properties>
 
     <scm>
@@ -153,7 +164,7 @@
             <dependency>
                 <groupId>org.wso2.extension.siddhi.map.wso2event</groupId>
                 <artifactId>siddhi-map-wso2event</artifactId>
-                <version>4.0.0-M5-SNAPSHOT</version>
+                <version>${siddhi.map.wso2event.version}</version>
             </dependency>
 
 
@@ -314,6 +325,94 @@
                 <type>zip</type>
             </dependency>
 
+
+            <!-- OSGi test -->
+            <dependency>
+                <groupId>org.ops4j.pax.logging</groupId>
+                <artifactId>pax-logging-log4j2</artifactId>
+                <version>${pax.logging.log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam</artifactId>
+                <version>${pax.exam.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-container-native</artifactId>
+                <version>${pax.exam.container.native.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-testng</artifactId>
+                <version>${pax.exam.testng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.exam</groupId>
+                <artifactId>pax-exam-link-mvn</artifactId>
+                <version>${pax.exam.link.mvn.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ops4j.pax.url</groupId>
+                <artifactId>pax-url-aether</artifactId>
+                <version>${pax.url.aether.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.ant</artifactId>
+                <version>${org.jacoco.ant.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.ow2.spec.ee</groupId>
+                <artifactId>ow2-jta-1.1-spec</artifactId>
+                <version>${ow2.jta.spec.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.agent</artifactId>
+                <classifier>runtime</classifier>
+                <version>${jacoco.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+                <artifactId>siddhi-io-wso2event</artifactId>
+                <version>${siddhi.io.wso2event.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.container</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>slf4j.wso2</groupId>
+                <artifactId>slf4j</artifactId>
+                <version>${wso2.slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+                <artifactId>org.wso2.extension.io.wso2event.test.distribution</artifactId>
+                <version>${siddhi.io.wso2event.version}</version>
+                <type>zip</type>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -415,10 +514,6 @@
                             </goals>
                         </execution>
                     </executions>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.2-beta-2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
