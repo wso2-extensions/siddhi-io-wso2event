@@ -55,11 +55,11 @@ public class WSO2EventSource extends Source {
 
         this.sourceEventListener = sourceEventListener;
         this.optionHolder = optionHolder;
-        executionPlanContext.getSnapshotService().addSnapshotable("wso2event-source", this);
     }
 
     @Override
     public void connect() throws ConnectionUnavailableException {
+        //TODO Move the stream id to transport level
         String streamId = ((WSO2SourceMapper) sourceEventListener).getInputStreamId();
         StreamDefinition streamDefinition = WSO2EventSourceRegistrationManager.getWso2EventMappingService().
                 getStreamDefinition(streamId);
@@ -80,11 +80,13 @@ public class WSO2EventSource extends Source {
 
     @Override
     public void pause() {
+        //TODO Discuss
 
     }
 
     @Override
     public void resume() {
+        //TODO Discuss
 
     }
 
