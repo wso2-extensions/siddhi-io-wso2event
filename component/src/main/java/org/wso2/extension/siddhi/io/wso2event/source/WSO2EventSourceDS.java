@@ -27,16 +27,8 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
-import org.wso2.carbon.databridge.commons.Credentials;
-import org.wso2.carbon.databridge.commons.Event;
-import org.wso2.carbon.databridge.commons.StreamDefinition;
-import org.wso2.carbon.databridge.core.AgentCallback;
-import org.wso2.carbon.databridge.core.DataBridgeEventStreamService;
+import org.wso2.carbon.databridge.core.DataBridgeStreamStore;
 import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
-import org.wso2.extension.siddhi.map.wso2event.service.WSO2EventMappingServiceImpl;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
-
-import java.util.List;
 
 /**
  * Service component to consume DataBridgeReceiver Service.
@@ -46,7 +38,7 @@ import java.util.List;
         immediate = true
 )
 public class WSO2EventSourceDS {
-    private static final Log log = LogFactory.getLog(WSO2EventSourceDS.class);
+    private static final Log LOGGER = LogFactory.getLog(WSO2EventSourceDS.class);
 
     /**
      * This is the activation method of WSO2EventSource service. This will be called when its references are
@@ -57,8 +49,8 @@ public class WSO2EventSourceDS {
      */
     @Activate
     protected void start(BundleContext bundleContext) throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("WSO2EventSource Component is started");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("WSO2EventSource Component is started");
         }
     }
 
@@ -70,8 +62,8 @@ public class WSO2EventSourceDS {
      */
     @Deactivate
     protected void stop() throws Exception {
-        if (log.isDebugEnabled()) {
-            log.debug("WSO2EventSource Component is stoped");
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("WSO2EventSource Component is stopped");
         }
     }
 
@@ -91,7 +83,9 @@ public class WSO2EventSourceDS {
     protected void setDataBridgeSubscriberService(DataBridgeSubscriberService dataBridgeSubscriberService) {
         if (WSO2EventSourceRegistrationManager.getDataBridgeSubscriberService() == null) {
             WSO2EventSourceRegistrationManager.setDataBridgeSubscriberService(dataBridgeSubscriberService);
-            dataBridgeSubscriberService.subscribe(new AgentCallbackInner());
+            AgentCallbackImpl agentCallback = new AgentCallbackImpl();
+            WSO2EventSourceRegistrationManager.setAgentCallbackImpl(agentCallback);
+            dataBridgeSubscriberService.subscribe(agentCallback);
         }
 
     }
@@ -107,87 +101,30 @@ public class WSO2EventSourceDS {
     }
 
     /**
-     * This bind method will be called when DataBridgeEventStreamService OSGi service is registered.
+     * This bind method will be called when DataBridgeStreamStore OSGi service is registered.
      *
-     * @param dataBridgeEventStreamService The DataBridgeEventStreamService instance registered by databridge
+     * @param dataBridgeStreamStore The DataBridgeStreamStore instance registered by databridge
      *                                    as an OSGi service
      */
     @Reference(
-            name = "databridge.event.stream.service",
-            service = DataBridgeEventStreamService.class,
+            name = "databridge.stream.store",
+            service = DataBridgeStreamStore.class,
             cardinality = ReferenceCardinality.MANDATORY,
             policy = ReferencePolicy.DYNAMIC,
             unbind = "unsetDataBridgeEventStreamService"
     )
-    protected void setDataBridgeEventStreamService(DataBridgeEventStreamService dataBridgeEventStreamService) {
-        WSO2EventSourceRegistrationManager.setDataBridgeEventStreamService(dataBridgeEventStreamService);
+    protected void setDataBridgeEventStreamService(DataBridgeStreamStore dataBridgeStreamStore) {
+        WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(dataBridgeStreamStore);
     }
 
     /**
-     * This is the unbind method which gets called at the un-registration of DataBridgeEventStreamService OSGi service.
+     * This is the unbind method which gets called at the un-registration of DataBridgeStreamStore OSGi service.
      *
-     * @param dataBridgeEventStreamService The DataBridgeEventStreamService instance registered by databridge
+     * @param dataBridgeStreamStore The DataBridgeStreamStore instance registered by databridge
      *                                    as an OSGi service
      */
-    protected void unsetDataBridgeEventStreamService(DataBridgeEventStreamService dataBridgeEventStreamService) {
-        WSO2EventSourceRegistrationManager.setDataBridgeEventStreamService(null);
-    }
-
-    /**
-     * This bind method will be called when WSO2EventMappingServiceImpl OSGi service is registered.
-     *
-     * @param wso2EventMappingService The WSO2EventMappingService instance registered by siddhi-map-wso2event
-     *                                    as an OSGi service
-     */
-    @Reference(
-            name = "wso2Event.mapping.service",
-            service = WSO2EventMappingServiceImpl.class,
-            cardinality = ReferenceCardinality.MANDATORY,
-            policy = ReferencePolicy.DYNAMIC,
-            unbind = "unsetWSO2EventMappingService"
-    )
-    protected void setWSO2EventMappingService(WSO2EventMappingServiceImpl wso2EventMappingService) {
-        WSO2EventSourceRegistrationManager.setWso2EventMappingService(wso2EventMappingService);
-    }
-
-    /**
-     * This is the unbind method which gets called at the un-registration of WSO2EventMappingService OSGi service.
-     *
-     * @param wso2EventMappingService The WSO2EventMappingService instance registered by siddhi-map-wso2event
-     *                                    as an OSGi service
-     */
-    protected void unsetWSO2EventMappingService(WSO2EventMappingServiceImpl wso2EventMappingService) {
-        WSO2EventSourceRegistrationManager.setWso2EventMappingService(null);
-    }
-
-
-    static class AgentCallbackInner implements AgentCallback {
-
-        @Override
-        public void definedStream(StreamDefinition streamDefinition) {
-
-        }
-
-        @Override
-        public void removeStream(StreamDefinition streamDefinition) {
-
-        }
-
-        @Override
-        public void receive(List<Event> list, Credentials credentials) {
-            for (Event event : list) {
-                List<SourceEventListener> sourceEventListenerList = WSO2EventSourceRegistrationManager.
-                        getStreamSpecificEventListenerMap().get(event.getStreamId());
-                if (sourceEventListenerList != null) {
-                    for (SourceEventListener sourceEventListener : sourceEventListenerList) {
-                        sourceEventListener.onEvent(event);
-                    }
-                }
-                if (log.isDebugEnabled()) {
-                    log.debug("Event received at wso2Event source - " + event);
-                }
-            }
-        }
+    protected void unsetDataBridgeEventStreamService(DataBridgeStreamStore dataBridgeStreamStore) {
+        WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(null);
     }
 
 }

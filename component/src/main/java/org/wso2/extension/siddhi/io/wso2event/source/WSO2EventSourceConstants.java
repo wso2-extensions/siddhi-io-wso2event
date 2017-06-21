@@ -27,6 +27,5 @@ public class WSO2EventSourceConstants {
     private WSO2EventSourceConstants() {
     }
 
-    public static final String SOURCE_TYPE_WSO2EVENT = "wso2event";
-    public static final String SOURCE_STREAM_ID = "wso2.stream.id";
+    static final String SOURCE_STREAM_ID = "wso2.stream.id";
 }

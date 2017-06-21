@@ -27,15 +27,15 @@ public class WSO2EventSinkConstants {
     private WSO2EventSinkConstants() {
     }
 
-    public static final String WSO2EVENT_SINK_AUTHENTICATION_URL = "auth.url";
-    public static final String WSO2EVENT_SINK_URL = "url";
-    public static final String WSO2EVENT_SINK_TYPE = "type";
-    public static final String WSO2EVENT_SINK_USERNAME = "username";
-    public static final String WSO2EVENT_SINK_PASSWORD = "password";
-    public static final String WSO2EVENT_SINK_PUBLISHER_MODE = "mode";
-    public static final String WSO2EVENT_SINK_TIMEOUT = "timeout";
-    public static final String WSO2EVENT_SINK_PUBLISHER_PROTOCOL = "protocol";
-    public static final String DEFAULT_PUBLISHER_MODE = "non-blocking";
-    public static final String DEFAULT_PUBLISHER_PROTOCOL = "thrift";
+    static final String WSO2EVENT_SINK_AUTHENTICATION_URL = "auth.url";
+    static final String WSO2EVENT_SINK_URL = "url";
+    static final String WSO2EVENT_SINK_USERNAME = "username";
+    static final String WSO2EVENT_SINK_PASSWORD = "password";
+    static final String WSO2EVENT_SINK_PUBLISHER_MODE = "mode";
+    static final String WSO2EVENT_SINK_TIMEOUT = "timeout";
+    static final String WSO2EVENT_SINK_PUBLISHER_PROTOCOL = "protocol";
+    static final String DEFAULT_PUBLISHER_MODE = "non-blocking";
+    static final String DEFAULT_PUBLISHER_PROTOCOL = "thrift";
+    static final String SOURCE_STREAM_ID = "wso2.stream.id";
 
 }

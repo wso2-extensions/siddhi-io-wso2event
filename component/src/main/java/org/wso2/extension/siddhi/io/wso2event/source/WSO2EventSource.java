@@ -19,10 +19,11 @@
 package org.wso2.extension.siddhi.io.wso2event.source;
 
 import org.wso2.carbon.databridge.commons.StreamDefinition;
+import org.wso2.carbon.databridge.commons.exception.MalformedStreamDefinitionException;
 import org.wso2.extension.siddhi.map.wso2event.WSO2SourceMapper;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
 import org.wso2.siddhi.core.stream.input.source.Source;
 import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
@@ -48,10 +49,11 @@ public class WSO2EventSource extends Source {
 
     private SourceEventListener sourceEventListener;
     private OptionHolder optionHolder;
+    private String streamId;
 
     @Override
     public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder, ConfigReader configReader,
-                     ExecutionPlanContext executionPlanContext) {
+                     SiddhiAppContext siddhiAppContext) {
 
         this.sourceEventListener = sourceEventListener;
         this.optionHolder = optionHolder;
@@ -59,17 +61,35 @@ public class WSO2EventSource extends Source {
 
     @Override
     public void connect() throws ConnectionUnavailableException {
-        //TODO Move the stream id to transport level
-        String streamId = ((WSO2SourceMapper) sourceEventListener).getInputStreamId();
-        StreamDefinition streamDefinition = WSO2EventSourceRegistrationManager.getWso2EventMappingService().
-                getStreamDefinition(streamId);
-        WSO2EventSourceRegistrationManager.getDataBridgeEventStreamService().addStreamDefinition(streamDefinition);
+
+        StreamDefinition streamDefinition = ((WSO2SourceMapper) getMapper()).getWSO2StreamDefinition();
+        streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID,
+                null);
+
+        if (streamId != null) {
+            String[] streamIdArray = streamId.split(":");
+            try {
+                StreamDefinition sourceStreamDefinition = new StreamDefinition(streamIdArray[0], streamIdArray[1]);
+                sourceStreamDefinition.setTags(streamDefinition.getTags());
+                sourceStreamDefinition.setDescription(streamDefinition.getDescription());
+                sourceStreamDefinition.setNickName(streamDefinition.getNickName());
+                sourceStreamDefinition.setMetaData(streamDefinition.getMetaData());
+                sourceStreamDefinition.setCorrelationData(streamDefinition.getCorrelationData());
+                sourceStreamDefinition.setPayloadData(streamDefinition.getPayloadData());
+
+            } catch (MalformedStreamDefinitionException e) {
+                throw new ConnectionUnavailableException("Exception when generating the WSO2 stream definition", e);
+            }
+        } else {
+            streamId = streamDefinition.getStreamId();
+        }
+
+        WSO2EventSourceRegistrationManager.getDataBridgeStreamStore().addStreamDefinition(streamDefinition);
         WSO2EventSourceRegistrationManager.registerEventConsumer(streamId, sourceEventListener);
     }
 
     @Override
     public void disconnect() {
-        String streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID);
         WSO2EventSourceRegistrationManager.unregisterEventConsumer(streamId, sourceEventListener);
     }
 
@@ -80,14 +100,12 @@ public class WSO2EventSource extends Source {
 
     @Override
     public void pause() {
-        //TODO Discuss
-
+        WSO2EventSourceRegistrationManager.getAgentCallbackImpl().pause();
     }
 
     @Override
     public void resume() {
-        //TODO Discuss
-
+        WSO2EventSourceRegistrationManager.getAgentCallbackImpl().resume();
     }
 
     @Override

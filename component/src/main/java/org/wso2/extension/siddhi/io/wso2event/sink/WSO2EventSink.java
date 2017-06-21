@@ -30,7 +30,7 @@ import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
 import org.wso2.siddhi.annotation.Parameter;
 import org.wso2.siddhi.annotation.util.DataType;
-import org.wso2.siddhi.core.config.ExecutionPlanContext;
+import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
 import org.wso2.siddhi.core.stream.output.sink.Sink;
 import org.wso2.siddhi.core.util.config.ConfigReader;
@@ -60,7 +60,8 @@ import java.util.Map;
                 @Parameter(name = "auth.url", description = "The Thrift/Binary server endpoint url which used fot " +
                         "authentication purposes. It is not mandatory property. If this property is not provided " +
                         "then tcp-port+100 used for port in auth.url. " +
-                        "e.g., `ssl://localhost:7711`", type = {DataType.STRING}, optional = true),
+                        "e.g., `ssl://localhost:7711`", type = {DataType.STRING}, optional = true,
+                        defaultValue = "ssl://localhost:<tcp-port> + 100"),
                 @Parameter(name = "username", description = "The username is used for authentication flow before " +
                         "publishing events" +
                         "e.g., `admin`", type = {DataType.STRING}),
@@ -70,16 +71,17 @@ import java.util.Map;
                 @Parameter(name = "protocol", description = "There are two protocols that we can use to publish " +
                         "events through data bridge.Either, we can use thrift or binary. Default value is Thrift" +
                         "e.g., `thrift`",
-                        type = {DataType.STRING},
-                        optional = true),
+                        type = {DataType.STRING}, optional = true, defaultValue = WSO2EventSinkConstants.
+                        DEFAULT_PUBLISHER_PROTOCOL),
                 @Parameter(name = "mode", description = "Property which decides whether to publish events in " +
                         "synchronous or asynchronous mode. Default is non-blocking mode." +
                         "e.g., `blocking`",
-                        type = {DataType.STRING}, optional = true)}
+                        type = {DataType.STRING}, optional = true, defaultValue = WSO2EventSinkConstants.
+                        DEFAULT_PUBLISHER_MODE)}
 )
 public class WSO2EventSink extends Sink {
 
-    private static final Logger log = Logger.getLogger(WSO2EventSink.class);
+    private static final Logger LOGGER = Logger.getLogger(WSO2EventSink.class);
     private DataPublisher dataPublisher;
     private String authUrl;
     private String url;
@@ -89,11 +91,12 @@ public class WSO2EventSink extends Sink {
     private String protocol;
     private String siddhiAppName;
     private int timeout;
+    private String streamId;
 
 
     @Override
     protected void init(StreamDefinition outputStreamDefinition, OptionHolder optionHolder,
-                        ConfigReader sinkConfigReader, ExecutionPlanContext executionPlanContext) {
+                        ConfigReader sinkConfigReader, SiddhiAppContext siddhiAppContext) {
         this.authUrl = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_AUTHENTICATION_URL,
                 null);
         this.url = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_URL);
@@ -103,6 +106,8 @@ public class WSO2EventSink extends Sink {
                 WSO2EVENT_SINK_PUBLISHER_MODE, WSO2EventSinkConstants.DEFAULT_PUBLISHER_MODE);
         this.protocol = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.
                 WSO2EVENT_SINK_PUBLISHER_PROTOCOL, WSO2EventSinkConstants.DEFAULT_PUBLISHER_PROTOCOL);
+        this.streamId = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.SOURCE_STREAM_ID,
+                null);
 
         String timeoutAsString = optionHolder.validateAndGetStaticValue(WSO2EventSinkConstants.WSO2EVENT_SINK_TIMEOUT,
                 null);
@@ -110,7 +115,7 @@ public class WSO2EventSink extends Sink {
             this.timeout = Integer.parseInt(timeoutAsString);
         }
 
-        siddhiAppName = executionPlanContext.getName();
+        siddhiAppName = siddhiAppContext.getName();
     }
 
     @Override
@@ -148,12 +153,17 @@ public class WSO2EventSink extends Sink {
 
     @Override
     public void publish(Object payload, DynamicOptions transportOptions) throws ConnectionUnavailableException {
+
         Event event = (Event) (payload);
+        if (streamId != null) {
+            event.setStreamId(streamId);
+        }
+
         if (WSO2EventSinkConstants.DEFAULT_PUBLISHER_MODE.equalsIgnoreCase(publisherMode)) {
             dataPublisher.publish(event);
         } else {
             if (!dataPublisher.tryPublish(event, timeout)) {
-                log.error("Event dropped at WSO2Event sink in executionplan '" + siddhiAppName +
+                LOGGER.error("Event dropped at WSO2Event sink in executionplan '" + siddhiAppName +
                         " , dropping event: " + event);
             }
         }
@@ -165,7 +175,7 @@ public class WSO2EventSink extends Sink {
             try {
                 dataPublisher.shutdown();
             } catch (DataEndpointException e) {
-                log.error("Error in shutting down the data publisher created for execution plan " +
+                LOGGER.error("Error in shutting down the data publisher created for execution plan " +
                         siddhiAppName + " with the url:" + url + " authUrl:" + authUrl + " protocol:" +
                         protocol + " and userName:" + username + "," + e.getMessage(), e);
             }
