@@ -37,7 +37,7 @@
     </modules>
 
     <properties>
-        <siddhi.version>4.0.0-M8</siddhi.version>
+        <siddhi.version>4.0.0-M9</siddhi.version>
         <siddhi.io.wso2event.version>4.0.0-M5-SNAPSHOT</siddhi.io.wso2event.version>
         <siddhi.map.wso2event.version>4.0.0-M5-SNAPSHOT</siddhi.map.wso2event.version>
         <carbon.kernel.version>5.2.0-m3</carbon.kernel.version>
@@ -45,7 +45,7 @@
         <junit.version>4.12</junit.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons-io.version>2.5</commons-io.version>
-        <carbon.analytics.version>2.0.33-SNAPSHOT</carbon.analytics.version>
+        <carbon.analytics.version>2.0.37</carbon.analytics.version>
         <carbon.utils.version>1.2.1</carbon.utils.version>
         <carbon.datasources.version>1.1.0</carbon.datasources.version>
         <carbon.metrics.version>2.0.1</carbon.metrics.version>
