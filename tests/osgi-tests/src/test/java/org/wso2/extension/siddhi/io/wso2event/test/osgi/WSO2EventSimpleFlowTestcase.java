@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,7 @@ import static org.wso2.carbon.container.options.CarbonDistributionOption.copyOSG
 @ExamReactorStrategy(PerClass.class)
 @ExamFactory(CarbonContainerFactory.class)
 public class WSO2EventSimpleFlowTestcase {
-    private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.
-            getLogger(WSO2EventSimpleFlowTestcase.class);
-    private List<String> receivedEventNameList;
+
     private static final String STREAM_NAME = "org.wso2.esb.MediatorStatistics";
     private static final String VERSION = "1.0.0";
     private ThriftTestServer thriftTestServer;
@@ -111,7 +109,6 @@ public class WSO2EventSimpleFlowTestcase {
 
     @Test
     public void testBasicEventFlow() throws Exception {
-        logger.info("FFFFFFFFFFFF");
 
         AgentHolder.setConfigPath(DataPublisherTestUtil.getDataAgentConfigPath(agentConfigFileName));
         String hostName = DataPublisherTestUtil.LOCAL_HOST;

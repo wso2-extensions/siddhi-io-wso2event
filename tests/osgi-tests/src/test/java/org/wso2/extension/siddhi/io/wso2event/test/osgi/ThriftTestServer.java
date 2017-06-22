@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+ * Copyright (c) 2017, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,11 +37,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class ThriftTestServer {
-    Logger log = Logger.getLogger(ThriftTestServer.class);
-    ThriftDataReceiver thriftDataReceiver;
-    InMemoryStreamDefinitionStore streamDefinitionStore;
-    AtomicInteger numberOfEventsReceived;
-    RestarterThread restarterThread;
+
+    private static final Logger LOGGER = Logger.getLogger(ThriftTestServer.class);
+    private ThriftDataReceiver thriftDataReceiver;
+    private InMemoryStreamDefinitionStore streamDefinitionStore;
+    private AtomicInteger numberOfEventsReceived;
+    private RestarterThread restarterThread;
 
     public void addStreamDefinition(String streamDefinitionStr)
             throws StreamDefinitionStoreException, MalformedStreamDefinitionException {
@@ -84,26 +85,26 @@ public class ThriftTestServer {
             int totalSize = 0;
 
             public void definedStream(StreamDefinition streamDefinition) {
-                log.info("StreamDefinition " + streamDefinition);
+                LOGGER.info("StreamDefinition " + streamDefinition);
             }
 
             @Override
             public void removeStream(StreamDefinition streamDefinition) {
-                log.info("StreamDefinition remove " + streamDefinition);
+                LOGGER.info("StreamDefinition remove " + streamDefinition);
             }
 
             @Override
             public void receive(List<Event> eventList, Credentials credentials) {
                 numberOfEventsReceived.addAndGet(eventList.size());
-                log.info("Received events : " + numberOfEventsReceived);
+                LOGGER.info("Received events : " + numberOfEventsReceived);
             }
 
         });
 
         String address = "localhost";
-        log.info("Test Server starting on " + address);
+        LOGGER.info("Test Server starting on " + address);
         thriftDataReceiver.start(address);
-        log.info("Test Server Started");
+        LOGGER.info("Test Server Started");
     }
 
     public int getNumberOfEventsReceived() {
@@ -120,7 +121,7 @@ public class ThriftTestServer {
 
     public void stop() {
         thriftDataReceiver.stop();
-        log.info("Test Server Stopped");
+        LOGGER.info("Test Server Stopped");
     }
 
     public void stopAndStartDuration(int port, long stopAfterTimeMilliSeconds, long startAfterTimeMS)
@@ -160,7 +161,7 @@ public class ThriftTestServer {
 
             eventReceived = getNumberOfEventsReceived();
 
-            log.info("Number of events received in server shutdown :" + eventReceived);
+            LOGGER.info("Number of events received in server shutdown :" + eventReceived);
             try {
                 Thread.sleep(startAfterTimeMS);
             } catch (InterruptedException e) {
@@ -173,7 +174,7 @@ public class ThriftTestServer {
                     start(port);
                 }
             } catch (DataBridgeException e) {
-                log.error(e);
+                LOGGER.error(e);
             }
 
         }
