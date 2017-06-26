@@ -37,7 +37,6 @@ import org.wso2.carbon.databridge.core.exception.StreamDefinitionStoreException;
 import org.wso2.carbon.kernel.utils.CarbonServerInfo;
 import org.wso2.extension.siddhi.io.wso2event.test.osgi.util.DataPublisherTestUtil;
 
-import java.util.List;
 import javax.inject.Inject;
 
 import static org.ops4j.pax.exam.CoreOptions.maven;
