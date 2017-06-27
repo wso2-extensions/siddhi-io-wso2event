@@ -20,7 +20,7 @@ package org.wso2.extension.siddhi.io.wso2event.source;
 
 import org.wso2.carbon.databridge.commons.StreamDefinition;
 import org.wso2.carbon.databridge.commons.exception.MalformedStreamDefinitionException;
-import org.wso2.extension.siddhi.map.wso2event.WSO2SourceMapper;
+import org.wso2.extension.siddhi.map.wso2event.source.WSO2SourceMapper;
 import org.wso2.siddhi.annotation.Example;
 import org.wso2.siddhi.annotation.Extension;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
