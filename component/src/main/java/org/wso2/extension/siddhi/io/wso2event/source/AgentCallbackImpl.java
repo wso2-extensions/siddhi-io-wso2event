@@ -69,7 +69,7 @@ public class AgentCallbackImpl implements AgentCallback {
                     getStreamSpecificEventListenerMap().get(event.getStreamId());
             if (sourceEventListenerList != null) {
                 for (SourceEventListener sourceEventListener : sourceEventListenerList) {
-                    sourceEventListener.onEvent(event);
+                    sourceEventListener.onEvent(event, null);
                 }
             }
             if (LOGGER.isDebugEnabled()) {

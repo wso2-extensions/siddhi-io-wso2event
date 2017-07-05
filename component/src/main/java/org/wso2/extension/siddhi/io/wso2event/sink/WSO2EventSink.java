@@ -188,6 +188,11 @@ public class WSO2EventSink extends Sink {
     }
 
     @Override
+    public Class[] getSupportedInputEventClasses() {
+        return new Class[]{Event.class};
+    }
+
+    @Override
     public String[] getSupportedDynamicOptions() {
         return new String[]{};
     }

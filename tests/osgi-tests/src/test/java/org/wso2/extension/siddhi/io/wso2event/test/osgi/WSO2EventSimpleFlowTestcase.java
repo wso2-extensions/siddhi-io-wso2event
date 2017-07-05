@@ -107,7 +107,7 @@ public class WSO2EventSimpleFlowTestcase {
     }
 
     @Test
-    public void testBasicEventFlow() throws Exception {
+    public void testBasicWSO2EventFlow() throws Exception {
 
         AgentHolder.setConfigPath(DataPublisherTestUtil.getDataAgentConfigPath(agentConfigFileName));
         String hostName = DataPublisherTestUtil.LOCAL_HOST;
