@@ -45,7 +45,7 @@
         <junit.version>4.12</junit.version>
         <commons.logging.version>1.1.1</commons.logging.version>
         <commons-io.version>2.5</commons-io.version>
-        <carbon.analytics.version>2.0.37</carbon.analytics.version>
+        <carbon.analytics.version>2.0.46</carbon.analytics.version>
         <carbon.utils.version>1.2.1</carbon.utils.version>
         <carbon.datasources.version>1.1.0</carbon.datasources.version>
         <carbon.metrics.version>2.0.1</carbon.metrics.version>
