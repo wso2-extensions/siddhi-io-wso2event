@@ -477,11 +477,11 @@
                     <execution>
                         <phase>package</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <replace dir="target/siddhi-io-wso2event/wso2" token="false" value="true">
                                     <include name="**/bundles.info" />
                                 </replace>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
@@ -491,7 +491,7 @@
                         <id>clean_target</id>
                         <phase>install</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <delete dir="target/archive-tmp"/>
                                 <delete dir="target/dependency-maven-plugin-markers"/>
                                 <delete dir="target/org.eclipse.equinox.executable-3.5.0.v20110530-7P7NFUFFLWUl76mart"/>
@@ -505,7 +505,7 @@
                                 <delete file="target/checkstyle-checker.xml"/>
                                 <delete file="target/checkstyle-result.xml"/>
                                 <delete file="target/checkstyle-suppressions.xml"/>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
