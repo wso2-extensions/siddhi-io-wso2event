@@ -18,6 +18,7 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
+import org.wso2.carbon.databridge.commons.Event;
 import org.wso2.carbon.databridge.commons.StreamDefinition;
 import org.wso2.carbon.databridge.commons.exception.MalformedStreamDefinitionException;
 import org.wso2.extension.siddhi.map.wso2event.source.WSO2SourceMapper;
@@ -52,15 +53,15 @@ public class WSO2EventSource extends Source {
     private String streamId;
 
     @Override
-    public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder, ConfigReader configReader,
-                     SiddhiAppContext siddhiAppContext) {
+    public void init(SourceEventListener sourceEventListener, OptionHolder optionHolder, String[] strings,
+                     ConfigReader configReader, SiddhiAppContext siddhiAppContext) {
 
         this.sourceEventListener = sourceEventListener;
         this.optionHolder = optionHolder;
     }
 
     @Override
-    public void connect() throws ConnectionUnavailableException {
+    public void connect(ConnectionCallback connectionCallback) throws ConnectionUnavailableException {
 
         StreamDefinition streamDefinition = ((WSO2SourceMapper) getMapper()).getWSO2StreamDefinition();
         streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID,
@@ -86,6 +87,11 @@ public class WSO2EventSource extends Source {
 
         WSO2EventSourceRegistrationManager.getDataBridgeStreamStore().addStreamDefinition(streamDefinition);
         WSO2EventSourceRegistrationManager.registerEventConsumer(streamId, sourceEventListener);
+    }
+
+    @Override
+    public Class[] getOutputEventClasses() {
+        return new Class[]{Event.class};
     }
 
     @Override
