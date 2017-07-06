@@ -211,7 +211,6 @@
             <plugin>
                 <groupId>org.wso2.carbon.maven</groupId>
                 <artifactId>carbon-feature-plugin</artifactId>
-                <version>${carbon.feature.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>p2-repo-generation</id>
@@ -493,7 +492,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.5.2</version>
                 <configuration>
                     <descriptors>
                         <descriptor>${basedir}/src/assembly/bin.xml</descriptor>
