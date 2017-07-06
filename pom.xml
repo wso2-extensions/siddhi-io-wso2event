@@ -75,6 +75,7 @@
         <testng.version>6.9.4</testng.version>
         <wso2.slf4j.version>1.5.10.wso2v1</wso2.slf4j.version>
         <slf4j.version>1.7.12</slf4j.version>
+        <osgi.api.version>6.0.0</osgi.api.version>
     </properties>
 
     <scm>
@@ -87,6 +88,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>${osgi.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon</groupId>
+                <artifactId>org.wso2.carbon.launcher</artifactId>
+                <version>${carbon.kernel.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.wso2.siddhi</groupId>
                 <artifactId>siddhi-core</artifactId>
@@ -412,7 +423,6 @@
                 <type>zip</type>
                 <scope>test</scope>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 

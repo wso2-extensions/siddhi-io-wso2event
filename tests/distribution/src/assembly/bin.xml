@@ -17,7 +17,7 @@
   -->
 <assembly>
     <includeBaseDirectory>true</includeBaseDirectory>
-    <baseDirectory>wso2das-${project.version}</baseDirectory>
+    <baseDirectory>siddhi-io-wso2event-test-${siddhi.io.wso2event.version}</baseDirectory>
     <id>WSO2 Data Analytics Server Distribution</id>
     <formats>
         <format>zip</format>
@@ -25,8 +25,9 @@
 
     <fileSets>
         <fileSet>
-            <directory>target/siddhi-io-wso2event</directory>
-            <outputDirectory>/</outputDirectory>
+            <directory>target/siddhi-io-wso2event-${siddhi.io.wso2event.version}</directory>
+            <outputDirectory></outputDirectory>
+            <fileMode>644</fileMode>
             <excludes>
                 <exclude>README.txt</exclude>
                 <exclude>LICENSE.txt</exclude>
@@ -47,7 +48,7 @@
 
         <fileSet>
             <directory>../..</directory>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory></outputDirectory>
             <includes>
                 <include>README.md</include>
                 <include>LICENSE</include>
@@ -124,7 +125,7 @@
 
     <files>
         <file>
-            <source>target/siddhi-io-wso2event/bin/kernel-version.txt</source>
+            <source>target/siddhi-io-wso2event-${siddhi.io.wso2event.version}/bin/kernel-version.txt</source>
             <outputDirectory>bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>444</fileMode>
@@ -136,7 +137,7 @@
             <fileMode>644</fileMode>
         </file>
         <file>
-            <source>target/siddhi-io-wso2event/bin/README.txt</source>
+            <source>target/siddhi-io-wso2event-${siddhi.io.wso2event.version}/bin/README.txt</source>
             <outputDirectory>bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>444</fileMode>
