@@ -28,7 +28,7 @@
 
     <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
     <artifactId>siddhi-io-wso2event-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.0</version>
     <name>Siddhi IO WSO2Event Extensions</name>
 
     <modules>
@@ -38,7 +38,7 @@
 
     <properties>
         <siddhi.version>4.0.0-M13</siddhi.version>
-        <siddhi.io.wso2event.version>4.0.0-SNAPSHOT</siddhi.io.wso2event.version>
+        <siddhi.io.wso2event.version>4.0.0</siddhi.io.wso2event.version>
         <siddhi.map.wso2event.version>4.0.0</siddhi.map.wso2event.version>
         <carbon.kernel.version>5.2.0-m3</carbon.kernel.version>
         <log4j.version>1.2.17.wso2v1</log4j.version>
@@ -83,7 +83,7 @@
         <url>https://github.com/wso2-extensions/siddhi-io-wso2event.git</url>
         <developerConnection>scm:git:https://github.com/wso2-extensions/siddhi-io-wso2event.git
         </developerConnection>
-        <tag>HEAD</tag>
+        <tag>v4.0.0</tag>
     </scm>
 
     <dependencyManagement>
