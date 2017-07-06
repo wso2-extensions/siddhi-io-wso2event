@@ -351,7 +351,7 @@
                         <configuration>
                             <productConfigurationFile>${basedir}/carbon.product</productConfigurationFile>
                             <repositoryURL>file:${basedir}/target/p2-repo</repositoryURL>
-                            <targetPath>file:${basedir}/target/siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2</targetPath>
+                            <targetPath>file:${basedir}/target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2</targetPath>
                             <runtime>worker</runtime>
                         </configuration>
                     </execution>
@@ -364,7 +364,7 @@
                         <configuration>
                             <runtime>worker</runtime>
                             <repositoryURL>file:${basedir}/target/p2-repo</repositoryURL>
-                            <destination>${basedir}/target/siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2</destination>
+                            <destination>${basedir}/target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2</destination>
                             <deleteOldRuntimeFiles>true</deleteOldRuntimeFiles>
                             <features>
                                 <feature>
@@ -460,7 +460,7 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <replace dir="target/siddhi-io-wso2event-${siddhi.io.wso2event.version}" token="false" value="true">
+                                <replace dir="target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}" token="false" value="true">
                                     <include name="**/bundles.info" />
                                 </replace>
                             </tasks>
@@ -480,7 +480,7 @@
                                 <delete dir="target/p2-repo" />
                                 <!-- Figure out a way to delete tmp.* files -->
                                 <delete file="target/tmp" />
-                                <delete dir="target/siddhi-io-wso2event-${siddhi.io.wso2event.version}" />
+                                <delete dir="target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}" />
                                 <delete dir="target/antrun" />
                             </target>
                         </configuration>
@@ -498,7 +498,7 @@
                     <descriptors>
                         <descriptor>${basedir}/src/assembly/bin.xml</descriptor>
                     </descriptors>
-                    <finalName>siddhi-io-wso2event-test-${siddhi.io.wso2event.version}</finalName>
+                    <finalName>wso2siddhi-io-wso2event-test-${siddhi.io.wso2event.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
                 <executions>
