@@ -26,6 +26,8 @@ version="5.2.0.m3" useFeatures="true" includeLaunchers="true">
    <launcherArgs>
    </launcherArgs>
 
+   <launcher name="eclipse"/>
+
    <plugins>
    </plugins>
 
