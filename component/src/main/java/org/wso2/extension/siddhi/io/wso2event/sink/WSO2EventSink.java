@@ -48,12 +48,17 @@ import java.util.Map;
         namespace = "sink",
         description = "The WSO2Event source pushes wso2events via TCP (databridge) in `wso2event` format. " +
                 "You can send wso2events through `Thrift` or `Binary` protocols.",
-        examples = @Example(syntax = "@sink(type='wso2event', url=\"tcp://localhost:7611\", " +
-                "auth.url=\"ssl://localhost:7711\", protocol=\"thrift\", username=\"admin\", password=\"admin\", " +
-                "mode=\"non-blocking\" , @map(type='wso2event',  wso2.stream.id='fooStream:1.0.0'))\n" +
+        examples = @Example(syntax = "@sink(type='wso2event', wso2.stream.id='fooStream:1.0.0'," +
+                " url=\"tcp://localhost:7611\", auth.url=\"ssl://localhost:7711\", protocol=\"thrift\", " +
+                "username=\"admin\", password=\"admin\", " +
+                "mode=\"non-blocking\" , @map(type='wso2event'))\n" +
                 "Define stream barStream(system string, price float, volume long);",
                 description = "As defined in above query events are pushed to destination that defined."),
         parameters = {
+                @Parameter(name = "wso2.stream.id", description = "Stream Id to use when publishing events. If " +
+                        "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0 ." +
+                        "e.g., `org.wso2.stream.bar.stream:1.0.0`", defaultValue = "siddhi.stream.name:1.0.0",
+                        type = {DataType.STRING}, optional = true),
                 @Parameter(name = "url", description = "The URL to which the outgoing events published via " +
                         "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
                         type = {DataType.STRING}),
@@ -77,7 +82,8 @@ import java.util.Map;
                         "synchronous or asynchronous mode. Default is non-blocking mode." +
                         "e.g., `blocking`",
                         type = {DataType.STRING}, optional = true, defaultValue = WSO2EventSinkConstants.
-                        DEFAULT_PUBLISHER_MODE)}
+                        DEFAULT_PUBLISHER_MODE)
+        }
 )
 public class WSO2EventSink extends Sink {
 

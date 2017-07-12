@@ -37,7 +37,7 @@
     </modules>
 
     <properties>
-        <siddhi.version>4.0.0-M13</siddhi.version>
+        <siddhi.version>4.0.0-M16</siddhi.version>
         <siddhi.io.wso2event.version>4.0.1-SNAPSHOT</siddhi.io.wso2event.version>
         <siddhi.map.wso2event.version>4.0.0</siddhi.map.wso2event.version>
         <carbon.kernel.version>5.2.0-m3</carbon.kernel.version>
@@ -457,6 +457,18 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wso2.siddhi</groupId>
+                <artifactId>siddhi-doc-gen</artifactId>
+                <version>${siddhi.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-md-docs</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
