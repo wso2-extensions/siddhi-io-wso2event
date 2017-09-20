@@ -27,6 +27,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.wso2.carbon.container.CarbonContainerFactory;
+import org.wso2.carbon.container.options.CarbonDistributionOption;
 import org.wso2.carbon.databridge.agent.AgentHolder;
 import org.wso2.carbon.databridge.agent.DataPublisher;
 import org.wso2.carbon.databridge.commons.Event;
@@ -38,9 +39,6 @@ import org.wso2.carbon.kernel.utils.CarbonServerInfo;
 import org.wso2.extension.siddhi.io.wso2event.test.osgi.util.DataPublisherTestUtil;
 
 import javax.inject.Inject;
-
-import static org.ops4j.pax.exam.CoreOptions.maven;
-import static org.wso2.carbon.container.options.CarbonDistributionOption.copyOSGiLibBundle;
 
 /**
  * WSO2Event Simple OSGI Tests.
@@ -55,6 +53,10 @@ public class WSO2EventSimpleFlowTestcase {
     private static final String VERSION = "1.0.0";
     private ThriftTestServer thriftTestServer;
     private String agentConfigFileName = "sync.data.agent.config.yaml";
+
+    private static final String DEPLOYMENT_FILENAME = "deployment.yaml";
+    private static final String CLIENTTRUSTSTORE_FILENAME = "client-truststore.jks";
+    private static final String KEYSTORESTORE_FILENAME = "wso2carbon.jks";
 
     private static final String STREAM_DEFN = "{" +
             "  'name':'" + STREAM_NAME + "'," +
@@ -82,12 +84,7 @@ public class WSO2EventSimpleFlowTestcase {
     @Configuration
     public Option[] createConfiguration() {
         return new Option[]{
-                copyOSGiLibBundle(maven().artifactId("siddhi-io-wso2event").
-                        groupId("org.wso2.extension.siddhi.io.wso2event")
-                        .versionAsInProject()),
-                copyOSGiLibBundle(maven().artifactId("siddhi-map-wso2event").
-                        groupId("org.wso2.extension.siddhi.map.wso2event")
-                        .version("4.0.0"))
+                CarbonDistributionOption.debug(5005)
         };
     }
 
@@ -110,6 +107,7 @@ public class WSO2EventSimpleFlowTestcase {
     public void testBasicWSO2EventFlow() throws Exception {
 
         AgentHolder.setConfigPath(DataPublisherTestUtil.getDataAgentConfigPath(agentConfigFileName));
+
         String hostName = DataPublisherTestUtil.LOCAL_HOST;
         DataPublisher dataPublisher = new DataPublisher("Thrift", "tcp://" + hostName + ":7611",
                 "ssl://" + hostName + ":7711", "admin", "admin");
@@ -134,5 +132,4 @@ public class WSO2EventSimpleFlowTestcase {
         thriftTestServer.stop();
 
     }
-
 }

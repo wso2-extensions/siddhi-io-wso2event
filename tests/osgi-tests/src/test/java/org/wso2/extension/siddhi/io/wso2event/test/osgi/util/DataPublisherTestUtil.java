@@ -89,5 +89,4 @@ public class DataPublisherTestUtil {
         }
         return filePath.getAbsolutePath() + File.separator + "databridge.config.yaml";
     }
-
 }

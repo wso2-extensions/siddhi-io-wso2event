@@ -29,7 +29,3 @@ In the above format, the event is delivered to one endpoint on the first cluster
 ##Siddhi WSO2Event Sink
 
 WSO2Event source handles WSO2 events. It sends WSO2 events over Thrift using TCP, SSL/ TCP, HTTP, and HTTPS protocols to any external server, which can receive them.
-
-## API Docs:
-
-1. <a href="./api/4.0.1-SNAPSHOT">4.0.1-SNAPSHOT</a>

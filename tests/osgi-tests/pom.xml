@@ -15,7 +15,8 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
@@ -54,9 +55,18 @@
             <artifactId>siddhi-core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.wso2.eclipse.osgi</groupId>
+            <artifactId>org.eclipse.osgi.services</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
@@ -94,20 +104,18 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
-            <artifactId>siddhi-io-wso2event</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.container</artifactId>
         </dependency>
+        <!--Pax exam Container Carbon-->
         <dependency>
-            <groupId>slf4j.wso2</groupId>
-            <artifactId>slf4j</artifactId>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>osgi-test-util</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+            <artifactId>siddhi-io-wso2event</artifactId>
         </dependency>
         <dependency>
             <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
@@ -115,7 +123,18 @@
             <type>zip</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.databridge.receiver.thrift</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.databridge.receiver.binary</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
     <profiles>
         <profile>
             <id>with-tests</id>
@@ -148,13 +167,26 @@
                                     </artifactItems>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>copy-jacoco-dependencies</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}</outputDirectory>
+                                    <includeTypes>jar</includeTypes>
+                                    <includeArtifactIds>org.jacoco.ant</includeArtifactIds>
+                                    <stripVersion>true</stripVersion>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <version>2.18.1</version>
                         <configuration>
-                            <argLine>${surefireArgLine}</argLine>
                             <systemPropertyVariables>
                                 <org.ops4j.pax.url.mvn.localRepository>${settings.localRepository}
                                 </org.ops4j.pax.url.mvn.localRepository>
@@ -164,7 +196,6 @@
                                 </org.wso2.carbon.test.default.distribution>
                                 <org.ops4j.pax.logging.DefaultServiceLog.level>DEBUG
                                 </org.ops4j.pax.logging.DefaultServiceLog.level>
-                                <carbon.home>src/test/resources/carbon-home.conf</carbon.home>
                             </systemPropertyVariables>
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
@@ -175,30 +206,67 @@
                         </configuration>
                     </plugin>
                     <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>copy-resources</id>
-                                <phase>generate-resources</phase>
+                                <id>jacoco-initialize</id>
                                 <goals>
-                                    <goal>copy-resources</goal>
+                                    <goal>prepare-agent</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>
-                                        ${project.build.directory}/wso2carbon-kernel-${project.version}/conf/security
-                                    </outputDirectory>
-                                    <overwrite>true</overwrite>
-                                    <resources>
-                                        <resource>
-                                            <directory>src/test/resources/carbon-home/conf/security</directory>
-                                            <includes>
-                                                <include>carbon-jaas.config</include>
-                                            </includes>
-                                        </resource>
-                                    </resources>
+                                    <destFile>${project.build.directory}/jacoco.exec</destFile>
+                                    <propertyName>jcoverage.command</propertyName>
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>post-integration-test</phase>
+                                <configuration>
+                                    <target xmlns:jacoco="antlib:org.jacoco.ant">
+                                        <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+                                            <classpath path="${project.build.directory}"/>
+                                        </taskdef>
+                                        <!--Report merge is done so as to fix build when tests are skipped -->
+                                        <jacoco:merge
+                                                destfile="${project.build.directory}/coverage-reports/jacoco.exec">
+                                            <fileset dir="${project.build.directory}" includes="*.exec"/>
+                                        </jacoco:merge>
+                                        <!-- OSGi Test coverage only enabled for org.wso2.carbon.stream.core module-->
+                                        <jacoco:report>
+                                            <executiondata>
+                                                <file file="${project.build.directory}/coverage-reports/jacoco.exec"/>
+                                            </executiondata>
+                                            <structure name="Stream processor core OSGi Tests">
+                                                <classfiles>
+                                                    <fileset
+                                                            dir="../org.wso2.carbon.stream.processor.core/target/classes"/>
+                                                </classfiles>
+                                                <sourcefiles encoding="UTF-8">
+                                                    <fileset dir="../org.wso2.carbon.stream.processor.core/src"/>
+                                                </sourcefiles>
+                                            </structure>
+                                            <html destdir="${project.build.directory}/coverage-reports"/>
+                                        </jacoco:report>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.jacoco</groupId>
+                                <artifactId>org.jacoco.ant</artifactId>
+                                <version>${org.jacoco.ant.version}</version>
+                            </dependency>
+                        </dependencies>
                     </plugin>
                     <plugin>
                         <groupId>org.ops4j.pax.exam</groupId>
