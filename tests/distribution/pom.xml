@@ -160,6 +160,11 @@
             <artifactId>org.wso2.carbon.msf4j.interceptor.common.feature</artifactId>
             <type>zip</type>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.databridge.feature</artifactId>
+            <type>zip</type>
+        </dependency>
     </dependencies>
 
     <build>
@@ -310,6 +315,11 @@
                                     <version>${carbon.kernel.version}</version>
                                 </feature>
 
+                                <feature>
+                                    <id>org.wso2.carbon.databridge.feature</id>
+                                    <version>${carbon.analytics-common.version}</version>
+                                </feature>
+
                             </features>
                         </configuration>
                     </execution>
@@ -444,6 +454,12 @@
                                 <feature>
                                     <id>org.wso2.carbon.pax.exam.feature.group</id>
                                     <version>${carbon.kernel.version}</version>
+                                </feature>
+
+                                <!-- Databridge feature -->
+                                <feature>
+                                    <id>org.wso2.carbon.databridge.feature.group</id>
+                                    <version>${carbon.analytics-common.version}</version>
                                 </feature>
                             </features>
                         </configuration>

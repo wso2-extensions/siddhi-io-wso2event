@@ -23,7 +23,6 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.ops4j.pax.exam.testng.listener.PaxExam;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.wso2.carbon.container.CarbonContainerFactory;
@@ -35,10 +34,13 @@ import org.wso2.carbon.databridge.commons.exception.MalformedStreamDefinitionExc
 import org.wso2.carbon.databridge.commons.utils.DataBridgeCommonsUtils;
 import org.wso2.carbon.databridge.core.exception.DataBridgeException;
 import org.wso2.carbon.databridge.core.exception.StreamDefinitionStoreException;
-import org.wso2.carbon.kernel.utils.CarbonServerInfo;
+import org.wso2.carbon.kernel.CarbonServerInfo;
 import org.wso2.extension.siddhi.io.wso2event.test.osgi.util.DataPublisherTestUtil;
 
 import javax.inject.Inject;
+
+import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.wso2.carbon.container.options.CarbonDistributionOption.copyOSGiLibBundle;
 
 /**
  * WSO2Event Simple OSGI Tests.
@@ -83,12 +85,22 @@ public class WSO2EventSimpleFlowTestcase {
 
     @Configuration
     public Option[] createConfiguration() {
+        try {
+            init();
+        } catch (Exception e) {
+           //do nothing
+        }
         return new Option[]{
-                CarbonDistributionOption.debug(5005)
+                CarbonDistributionOption.debug(5005),
+                copyOSGiLibBundle(maven().artifactId("siddhi-io-wso2event").
+                        groupId("org.wso2.extension.siddhi.io.wso2event")
+                        .versionAsInProject()),
+                copyOSGiLibBundle(maven().artifactId("siddhi-map-wso2event").
+                        groupId("org.wso2.extension.siddhi.map.wso2event")
+                        .version("4.0.2"))
         };
     }
 
-    @BeforeClass
     public void init() throws Exception {
         DataPublisherTestUtil.setKeyStoreParams();
         DataPublisherTestUtil.setTrustStoreParams();
@@ -100,7 +112,6 @@ public class WSO2EventSimpleFlowTestcase {
         thriftTestServer = new ThriftTestServer();
         thriftTestServer.start(port);
         thriftTestServer.addStreamDefinition(STREAM_DEFN);
-
     }
 
     @Test
@@ -130,6 +141,5 @@ public class WSO2EventSimpleFlowTestcase {
         Assert.assertEquals(thriftTestServer.getNumberOfEventsReceived(), numberOfEventsSent);
         thriftTestServer.resetReceivedEvents();
         thriftTestServer.stop();
-
     }
 }

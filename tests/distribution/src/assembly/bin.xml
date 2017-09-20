@@ -95,6 +95,22 @@
                 <exclude>empty.txt</exclude>
             </excludes>
         </fileSet>
+        <fileSet>
+            <directory>target/extensions</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>**/*.jar</include>
+            </includes>
+            <fileMode>664</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>carbon-home/external-libs</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>**/*.jar</include>
+            </includes>
+            <fileMode>664</fileMode>
+        </fileSet>
     </fileSets>
     <files>
         <file>
@@ -118,6 +134,12 @@
         <file>
             <source>carbon-home/deployment/stream-definitions.yaml</source>
             <outputDirectory>deployment/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>carbon-home/resources/sync.data.agent.config.yaml</source>
+            <outputDirectory>wso2/default/test/resources</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
