@@ -16,10 +16,23 @@
 
 package org.wso2.extension.siddhi.io.wso2event.test.osgi.util;
 
+import org.apache.log4j.Logger;
+import org.wso2.carbon.utils.Constants;
+
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DataPublisherTestUtil {
+    private static final Logger LOGGER = Logger.getLogger(DataPublisherTestUtil.class);
     public static final String LOCAL_HOST = "localhost";
+
+    public static void setCarbonHome() {
+        Path carbonHome = Paths.get("");
+        carbonHome = Paths.get(carbonHome.toString(), "src", "test", "resources");
+        System.setProperty(Constants.CARBON_HOME, carbonHome.toString());
+        LOGGER.info("Carbon Home Absolute path set to: " + carbonHome.toAbsolutePath());
+    }
 
     public static void setTrustStoreParams() {
         File filePath = new File("src" + File.separator + "test" + File.separator + "resources");
@@ -89,5 +102,4 @@ public class DataPublisherTestUtil {
         }
         return filePath.getAbsolutePath() + File.separator + "databridge.config.yaml";
     }
-
 }

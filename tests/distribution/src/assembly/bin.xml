@@ -18,7 +18,7 @@
 <assembly>
     <includeBaseDirectory>true</includeBaseDirectory>
     <baseDirectory>wso2siddhi-io-wso2event-test-${siddhi.io.wso2event.version}</baseDirectory>
-    <id>WSO2 Data Analytics Server Distribution</id>
+    <id>WSO2 Stream Processor Distribution</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -26,16 +26,13 @@
     <fileSets>
         <fileSet>
             <directory>target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}</directory>
-            <outputDirectory></outputDirectory>
+            <outputDirectory>.</outputDirectory>
             <fileMode>644</fileMode>
             <excludes>
                 <exclude>README.txt</exclude>
                 <exclude>LICENSE.txt</exclude>
                 <exclude>bin/carbon.sh</exclude>
                 <exclude>bin/carbon.bat</exclude>
-                <exclude>bin/README.txt</exclude>
-                <exclude>bin/kernel-version.txt</exclude>
-                <exclude>bin/version.txt</exclude>
                 <exclude>release-notes.html</exclude>
                 <exclude>conf/osgi/launch.properties</exclude>
                 <exclude>conf/deployment.yaml</exclude>
@@ -45,24 +42,32 @@
                 <exclude>**/*.eclipse</exclude>
             </excludes>
         </fileSet>
-
         <fileSet>
             <directory>../..</directory>
-            <outputDirectory></outputDirectory>
+            <outputDirectory>.</outputDirectory>
             <includes>
                 <include>README.md</include>
                 <include>LICENSE</include>
             </includes>
         </fileSet>
-
+        <fileSet>
+            <directory>carbon-home/conf/default</directory>
+            <outputDirectory>conf/default</outputDirectory>
+            <fileMode>644</fileMode>
+        </fileSet>
         <fileSet>
             <directory>carbon-home/conf/transports</directory>
-            <outputDirectory>conf/transports</outputDirectory>
+            <outputDirectory>wso2/default/conf/transports</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
             <directory>carbon-home/conf/osgi</directory>
             <outputDirectory>conf/osgi</outputDirectory>
+            <fileMode>644</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>carbon-home/resources/security</directory>
+            <outputDirectory>resources/security</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
@@ -84,45 +89,29 @@
         </fileSet>
         <fileSet>
             <directory>carbon-home/deployment/siddhi-files</directory>
-            <outputDirectory>deployment/siddhi-files</outputDirectory>
+            <outputDirectory>wso2/default/deployment/siddhi-files</outputDirectory>
             <fileMode>644</fileMode>
             <excludes>
                 <exclude>empty.txt</exclude>
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>carbon-home/resources</directory>
-            <outputDirectory>resources</outputDirectory>
-            <fileMode>644</fileMode>
+            <directory>target/extensions</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>**/*.jar</include>
+            </includes>
+            <fileMode>664</fileMode>
         </fileSet>
         <fileSet>
-            <directory>.</directory>
-            <outputDirectory>deployment/workspace</outputDirectory>
-            <excludes>
-                <exclude>*/**</exclude>
-            </excludes>
-            <fileMode>644</fileMode>
-        </fileSet>
-
-        <fileSet>
-            <directory>.</directory>
-            <outputDirectory>deployment/csv-files</outputDirectory>
-            <excludes>
-                <exclude>*/**</exclude>
-            </excludes>
-            <fileMode>644</fileMode>
-        </fileSet>
-
-        <fileSet>
-            <directory>.</directory>
-            <outputDirectory>deployment/simulation-configs</outputDirectory>
-            <excludes>
-                <exclude>*/**</exclude>
-            </excludes>
-            <fileMode>644</fileMode>
+            <directory>carbon-home/external-libs</directory>
+            <outputDirectory>lib</outputDirectory>
+            <includes>
+                <include>**/*.jar</include>
+            </includes>
+            <fileMode>664</fileMode>
         </fileSet>
     </fileSets>
-
     <files>
         <file>
             <source>target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/bin/kernel-version.txt</source>
@@ -131,20 +120,26 @@
             <fileMode>444</fileMode>
         </file>
         <file>
-            <source>carbon-home/conf/deployment.yaml</source>
-            <outputDirectory>conf/</outputDirectory>
-            <filtered>true</filtered>
-            <fileMode>644</fileMode>
-        </file>
-        <file>
             <source>target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/bin/README.txt</source>
             <outputDirectory>bin/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>444</fileMode>
         </file>
         <file>
+            <source>carbon-home/bin/version.txt</source>
+            <outputDirectory>bin/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
             <source>carbon-home/deployment/stream-definitions.yaml</source>
             <outputDirectory>deployment/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>carbon-home/resources/sync.data.agent.config.yaml</source>
+            <outputDirectory>wso2/default/test/resources</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

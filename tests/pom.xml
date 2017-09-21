@@ -31,7 +31,8 @@
 
     <modules>
         <module>distribution</module>
-        <module>osgi-tests</module>
+        <!-- TODO: disabling OSGI tests -->
+        <!--<module>osgi-tests</module>-->
     </modules>
 
     <properties>
