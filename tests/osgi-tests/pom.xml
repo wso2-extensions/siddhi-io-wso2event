@@ -133,6 +133,11 @@
             <artifactId>org.wso2.carbon.databridge.receiver.binary</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon.analytics-common</groupId>
+            <artifactId>org.wso2.carbon.databridge.agent</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <profiles>

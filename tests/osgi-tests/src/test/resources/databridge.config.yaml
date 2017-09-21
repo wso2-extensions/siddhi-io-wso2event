@@ -30,7 +30,7 @@ databridge.config:
   clientTimeoutMin: 30
     # Keystore file path
     # THIS IS A MANDATORY FIELD
-  keyStoreLocation: ${sys:carbon.home}/wso2carbon.jks
+  keyStoreLocation: src/test/resources/wso2carbon.jks
     # Keystore password
     # THIS IS A MANDATORY FIELD
   keyStorePassword: wso2carbon
@@ -67,9 +67,9 @@ wso2.securevault:
     type: org.wso2.carbon.secvault.repository.DefaultSecretRepository
     parameters:
       privateKeyAlias: wso2carbon
-      keystoreLocation: ${sys:carbon.home}/securevault.jks
-      secretPropertiesFile: ${sys:carbon.home}/secrets.properties
+      keystoreLocation: src/test/resources/securevault.jks
+      secretPropertiesFile: src/test/resources/secrets.properties
   masterKeyReader:
     type: org.wso2.carbon.secvault.reader.DefaultMasterKeyReader
     parameters:
-      masterKeyReaderFile: ${sys:carbon.home}/master-keys.yaml
+      masterKeyReaderFile: src/test/resources/master-keys.yaml

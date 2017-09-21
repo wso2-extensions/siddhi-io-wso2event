@@ -17,7 +17,8 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>wso2</artifactId>
         <groupId>org.wso2</groupId>
@@ -37,16 +38,14 @@
     </modules>
 
     <properties>
-        <siddhi.version>4.0.0-M78</siddhi.version>
         <siddhi.io.wso2event.version>4.0.1-SNAPSHOT</siddhi.io.wso2event.version>
+        <siddhi.version>4.0.0-M78</siddhi.version>
+        <carbon.analytics.version>2.0.80-SNAPSHOT</carbon.analytics.version>
         <siddhi.map.wso2event.version>4.0.2</siddhi.map.wso2event.version>
+        <carbon.analytics-common.version>6.0.2</carbon.analytics-common.version>
         <carbon.kernel.version>5.2.0-alpha</carbon.kernel.version>
         <log4j.version>1.2.17.wso2v1</log4j.version>
-        <junit.version>4.12</junit.version>
-        <commons.logging.version>1.1.1</commons.logging.version>
-        <commons-io.version>2.5</commons-io.version>
-        <carbon.analytics-common.version>6.0.2</carbon.analytics-common.version>
-        <carbon.analytics.version>2.0.76-SNAPSHOT</carbon.analytics.version>
+        <commons.logging.version>1.2</commons.logging.version>
         <carbon.utils.version>2.0.2</carbon.utils.version>
         <carbon.datasources.version>1.1.2</carbon.datasources.version>
         <carbon.metrics.version>2.3.1</carbon.metrics.version>
@@ -64,7 +63,6 @@
         <carbon.touchpoint.version>1.1.0</carbon.touchpoint.version>
         <carbon.config.version>2.0.5</carbon.config.version>
         <carbon.securevault.version>5.0.8</carbon.securevault.version>
-
 
         <!--pax-exam dependencies-->
         <javax.inject.version>1</javax.inject.version>
@@ -147,12 +145,6 @@
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>${commons.logging.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.analytics-common</groupId>

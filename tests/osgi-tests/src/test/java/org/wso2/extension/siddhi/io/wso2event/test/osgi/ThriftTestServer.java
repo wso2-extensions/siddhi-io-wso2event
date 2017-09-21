@@ -27,8 +27,7 @@ import org.wso2.carbon.databridge.core.DataBridge;
 import org.wso2.carbon.databridge.core.definitionstore.InMemoryStreamDefinitionStore;
 import org.wso2.carbon.databridge.core.exception.DataBridgeException;
 import org.wso2.carbon.databridge.core.exception.StreamDefinitionStoreException;
-import org.wso2.carbon.databridge.core.internal.authentication.AuthenticationHandler;
-import org.wso2.carbon.databridge.core.utils.AgentSession;
+import org.wso2.carbon.databridge.core.internal.authentication.CarbonAuthenticationHandler;
 import org.wso2.carbon.databridge.receiver.thrift.ThriftDataReceiver;
 import org.wso2.extension.siddhi.io.wso2event.test.osgi.util.DataPublisherTestUtil;
 
@@ -61,20 +60,10 @@ public class ThriftTestServer {
         DataPublisherTestUtil.setKeyStoreParams();
         streamDefinitionStore = getStreamDefinitionStore();
         numberOfEventsReceived = new AtomicInteger(0);
-        DataBridge databridge = new DataBridge(new AuthenticationHandler() {
+        DataBridge databridge = new DataBridge(new CarbonAuthenticationHandler() {
             @Override
             public boolean authenticate(String userName, String password) {
                 return true; // allays authenticate to true
-
-            }
-
-            @Override
-            public void initContext(AgentSession agentSession) {
-                //To change body of implemented methods use File | Settings | File Templates.
-            }
-
-            @Override
-            public void destroyContext(AgentSession agentSession) {
 
             }
         }, streamDefinitionStore, DataPublisherTestUtil.getDataBridgeConfigPath());
