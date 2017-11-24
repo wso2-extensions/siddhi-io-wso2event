@@ -156,11 +156,6 @@
             <type>zip</type>
         </dependency>
         <dependency>
-            <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.msf4j.interceptor.common.feature</artifactId>
-            <type>zip</type>
-        </dependency>
-        <dependency>
             <groupId>org.wso2.carbon.analytics-common</groupId>
             <artifactId>org.wso2.carbon.databridge.feature</artifactId>
             <type>zip</type>
@@ -288,12 +283,6 @@
                                 <feature>
                                     <id>org.wso2.carbon.deployment.notifier.feature</id>
                                     <version>${carbon.deployment.version}</version>
-                                </feature>
-
-                                <!-- Interceptor -->
-                                <feature>
-                                    <id>org.wso2.carbon.msf4j.interceptor.common.feature</id>
-                                    <version>${carbon.analytics.version}</version>
                                 </feature>
 
                                 <!-- Stream Processor Features -->
@@ -431,10 +420,6 @@
                                 <feature>
                                     <id>org.wso2.msf4j.feature.group</id>
                                     <version>${msf4j.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.msf4j.interceptor.common.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
                                 </feature>
 
                                 <!-- Stream Processor Features -->
