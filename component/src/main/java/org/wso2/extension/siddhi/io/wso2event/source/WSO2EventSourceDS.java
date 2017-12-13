@@ -27,8 +27,13 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
+import org.wso2.carbon.databridge.core.DataBridgeReceiverService;
 import org.wso2.carbon.databridge.core.DataBridgeStreamStore;
 import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
+import org.wso2.siddhi.core.exception.ConnectionUnavailableException;
+import org.wso2.siddhi.core.stream.input.source.Source;
+
+import java.util.Iterator;
 
 /**
  * Service component to consume DataBridgeReceiver Service.
@@ -39,6 +44,8 @@ import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
 )
 public class WSO2EventSourceDS {
     private static final Log LOGGER = LogFactory.getLog(WSO2EventSourceDS.class);
+    private boolean isEventStreamServiceActive;
+    private boolean isReceiverServiceActive;
 
     /**
      * This is the activation method of WSO2EventSource service. This will be called when its references are
@@ -115,6 +122,11 @@ public class WSO2EventSourceDS {
     )
     protected void setDataBridgeEventStreamService(DataBridgeStreamStore dataBridgeStreamStore) {
         WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(dataBridgeStreamStore);
+        isEventStreamServiceActive = true;
+        if (isReceiverServiceActive) {
+            WSO2EventSourceDataHolder.setDatabridgeActivated(true);
+            connectSources();
+        }
     }
 
     /**
@@ -125,6 +137,54 @@ public class WSO2EventSourceDS {
      */
     protected void unsetDataBridgeEventStreamService(DataBridgeStreamStore dataBridgeStreamStore) {
         WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(null);
+        WSO2EventSourceDataHolder.setDatabridgeActivated(false);
+        isEventStreamServiceActive = false;
     }
 
+    /**
+     * This bind method will be called when DataBridgeReceiverService OSGi service is registered.
+     *
+     * @param dataBridgeReceiverService The DataBridgeReceiverService instance registered by databridge
+     *                                    as an OSGi service
+     */
+    @Reference(
+            name = "databridge.receiver.service",
+            service = DataBridgeReceiverService.class,
+            cardinality = ReferenceCardinality.MANDATORY,
+            policy = ReferencePolicy.DYNAMIC,
+            unbind = "unsetDataBridgeReceiverService"
+    )
+    protected void setDataBridgeReceiverService(DataBridgeReceiverService dataBridgeReceiverService) {
+        isReceiverServiceActive = true;
+        if (isEventStreamServiceActive) {
+            WSO2EventSourceDataHolder.setDatabridgeActivated(true);
+            connectSources();
+        }
+    }
+
+    /**
+     * This is the unbind method which gets called at the un-registration of DataBridgeReceiverService OSGi service.
+     *
+     * @param dataBridgeReceiverService The DataBridgeReceiverService instance registered by databridge
+     *                                    as an OSGi service
+     */
+    protected void unsetDataBridgeReceiverService(DataBridgeReceiverService dataBridgeReceiverService) {
+        WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(null);
+        WSO2EventSourceDataHolder.setDatabridgeActivated(false);
+        isReceiverServiceActive = false;
+    }
+
+    private void connectSources() {
+
+        for (Iterator<Source> iterator = WSO2EventSourceDataHolder.getSources().iterator(); iterator.hasNext(); ) {
+            Source source = iterator.next();
+            try {
+                ((WSO2EventSource) source).connect();
+            } catch (ConnectionUnavailableException e) {
+                LOGGER.error("Exception when generating the WSO2 stream definition for Source "
+                        + source.getElementId(), e);
+            }
+            iterator.remove();
+        }
+    }
 }
