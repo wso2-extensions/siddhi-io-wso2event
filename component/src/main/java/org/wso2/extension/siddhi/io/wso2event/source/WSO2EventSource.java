@@ -71,9 +71,17 @@ public class WSO2EventSource extends Source {
     @Override
     public void connect(ConnectionCallback connectionCallback) throws ConnectionUnavailableException {
 
+        streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID, null);
+        if (!WSO2EventSourceDataHolder.isDatabridgeActivated()) {
+            // Source connection delayed until data bridge core activated
+            WSO2EventSourceDataHolder.getSources().add(this);
+        } else {
+            connect();
+        }
+    }
+
+    protected void connect() throws ConnectionUnavailableException {
         StreamDefinition streamDefinition = ((WSO2SourceMapper) getMapper()).getWSO2StreamDefinition();
-        streamId = optionHolder.validateAndGetStaticValue(WSO2EventSourceConstants.SOURCE_STREAM_ID,
-                null);
 
         if (streamId != null) {
             String[] streamIdArray = streamId.split(":");
