@@ -15,12 +15,11 @@
   ~ limitations under the License.
   -->
 
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
-        <version>4.0.10-SNAPSHOT</version>
+        <version>4.0.10</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -257,28 +256,26 @@
                                 <configuration>
                                     <target xmlns:jacoco="antlib:org.jacoco.ant">
                                         <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-                                            <classpath path="${project.build.directory}"/>
+                                            <classpath path="${project.build.directory}" />
                                         </taskdef>
                                         <!--Report merge is done so as to fix build when tests are skipped -->
-                                        <jacoco:merge
-                                                destfile="${project.build.directory}/coverage-reports/jacoco.exec">
-                                            <fileset dir="${project.build.directory}" includes="*.exec"/>
+                                        <jacoco:merge destfile="${project.build.directory}/coverage-reports/jacoco.exec">
+                                            <fileset dir="${project.build.directory}" includes="*.exec" />
                                         </jacoco:merge>
                                         <!-- OSGi Test coverage only enabled for org.wso2.carbon.stream.core module-->
                                         <jacoco:report>
                                             <executiondata>
-                                                <file file="${project.build.directory}/coverage-reports/jacoco.exec"/>
+                                                <file file="${project.build.directory}/coverage-reports/jacoco.exec" />
                                             </executiondata>
                                             <structure name="Stream processor core OSGi Tests">
                                                 <classfiles>
-                                                    <fileset
-                                                            dir="../osgi-tests/target/classes"/>
+                                                    <fileset dir="../osgi-tests/target/classes" />
                                                 </classfiles>
                                                 <sourcefiles encoding="UTF-8">
-                                                    <fileset dir="../osgi-tests/src"/>
+                                                    <fileset dir="../osgi-tests/src" />
                                                 </sourcefiles>
                                             </structure>
-                                            <html destdir="${project.build.directory}/coverage-reports"/>
+                                            <html destdir="${project.build.directory}/coverage-reports" />
                                         </jacoco:report>
                                     </target>
                                 </configuration>
@@ -314,7 +311,7 @@
     </profiles>
 
     <properties>
-        <surefireArgLine/>
+        <surefireArgLine />
     </properties>
 
 </project>
