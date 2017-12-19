@@ -235,6 +235,17 @@
                                     <propertyName>jcoverage.command</propertyName>
                                 </configuration>
                             </execution>
+                            <execution>
+                                <id>jacoco-site</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${basedir}/target/coverage-reports/jacoco.exec</dataFile>
+                                    <outputDirectory>${basedir}/target/coverage-reports/</outputDirectory>
+                                </configuration>
+                            </execution>
                         </executions>
                     </plugin>
                     <plugin>
