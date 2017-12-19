@@ -15,12 +15,12 @@
   ~ limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
-        <version>4.0.1-SNAPSHOT</version>
+        <version>4.0.9-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -107,12 +107,16 @@
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.container</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.wso2.carbon</groupId>
+            <artifactId>org.wso2.carbon.core</artifactId>
+        </dependency>
         <!--Pax exam Container Carbon-->
-       <!-- <dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>osgi-test-util</artifactId>
             <scope>test</scope>
-        </dependency>-->
+        </dependency>
         <dependency>
             <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
             <artifactId>siddhi-io-wso2event</artifactId>
@@ -136,6 +140,11 @@
         <dependency>
             <groupId>org.wso2.carbon.analytics-common</groupId>
             <artifactId>org.wso2.carbon.databridge.agent</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -201,6 +210,7 @@
                                 </org.wso2.carbon.test.default.distribution>
                                 <org.ops4j.pax.logging.DefaultServiceLog.level>DEBUG
                                 </org.ops4j.pax.logging.DefaultServiceLog.level>
+                                <siddhi.io.wso2.version>${siddhi.io.wso2event.version}</siddhi.io.wso2.version>
                             </systemPropertyVariables>
                             <suiteXmlFiles>
                                 <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
@@ -213,6 +223,7 @@
                     <plugin>
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>${org.jacoco.version}</version>
                         <executions>
                             <execution>
                                 <id>jacoco-initialize</id>
@@ -222,6 +233,17 @@
                                 <configuration>
                                     <destFile>${project.build.directory}/jacoco.exec</destFile>
                                     <propertyName>jcoverage.command</propertyName>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>jacoco-site</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                                <configuration>
+                                    <dataFile>${basedir}/target/coverage-reports/jacoco.exec</dataFile>
+                                    <outputDirectory>${basedir}/target/coverage-reports/</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -250,10 +272,10 @@
                                             <structure name="Stream processor core OSGi Tests">
                                                 <classfiles>
                                                     <fileset
-                                                            dir="../org.wso2.carbon.stream.processor.core/target/classes"/>
+                                                            dir="../osgi-tests/target/classes"/>
                                                 </classfiles>
                                                 <sourcefiles encoding="UTF-8">
-                                                    <fileset dir="../org.wso2.carbon.stream.processor.core/src"/>
+                                                    <fileset dir="../osgi-tests/src"/>
                                                 </sourcefiles>
                                             </structure>
                                             <html destdir="${project.build.directory}/coverage-reports"/>
@@ -276,6 +298,7 @@
                     <plugin>
                         <groupId>org.ops4j.pax.exam</groupId>
                         <artifactId>maven-paxexam-plugin</artifactId>
+                        <version>1.2.4</version>
                         <executions>
                             <execution>
                                 <id>generate-config</id>
@@ -289,4 +312,9 @@
             </build>
         </profile>
     </profiles>
+
+    <properties>
+        <surefireArgLine/>
+    </properties>
+
 </project>

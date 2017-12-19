@@ -28,11 +28,10 @@ import java.util.List;
  */
 public class WSO2EventSourceDataHolder {
 
-    private WSO2EventSourceDataHolder() {
-    }
-
     private static List<Source> sources = new ArrayList<>();
     private static boolean isDatabridgeActivated;
+    private WSO2EventSourceDataHolder() {
+    }
 
     public static List<Source> getSources() {
         return WSO2EventSourceDataHolder.sources;

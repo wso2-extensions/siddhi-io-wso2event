@@ -52,12 +52,12 @@
         </fileSet>
         <fileSet>
             <directory>carbon-home/conf/default</directory>
-            <outputDirectory>conf/default</outputDirectory>
+            <outputDirectory>conf/worker</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
             <directory>carbon-home/conf/transports</directory>
-            <outputDirectory>wso2/default/conf/transports</outputDirectory>
+            <outputDirectory>wso2/worker/conf/transports</outputDirectory>
             <fileMode>644</fileMode>
         </fileSet>
         <fileSet>
@@ -89,7 +89,7 @@
         </fileSet>
         <fileSet>
             <directory>carbon-home/deployment/siddhi-files</directory>
-            <outputDirectory>wso2/default/deployment/siddhi-files</outputDirectory>
+            <outputDirectory>wso2/worker/deployment/siddhi-files</outputDirectory>
             <fileMode>644</fileMode>
             <excludes>
                 <exclude>empty.txt</exclude>
@@ -139,7 +139,7 @@
         </file>
         <file>
             <source>carbon-home/resources/sync.data.agent.config.yaml</source>
-            <outputDirectory>wso2/default/test/resources</outputDirectory>
+            <outputDirectory>wso2/worker/test/resources</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

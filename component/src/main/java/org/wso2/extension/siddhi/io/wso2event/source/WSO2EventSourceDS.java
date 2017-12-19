@@ -111,7 +111,7 @@ public class WSO2EventSourceDS {
      * This bind method will be called when DataBridgeStreamStore OSGi service is registered.
      *
      * @param dataBridgeStreamStore The DataBridgeStreamStore instance registered by databridge
-     *                                    as an OSGi service
+     *                              as an OSGi service
      */
     @Reference(
             name = "databridge.stream.store",
@@ -133,7 +133,7 @@ public class WSO2EventSourceDS {
      * This is the unbind method which gets called at the un-registration of DataBridgeStreamStore OSGi service.
      *
      * @param dataBridgeStreamStore The DataBridgeStreamStore instance registered by databridge
-     *                                    as an OSGi service
+     *                              as an OSGi service
      */
     protected void unsetDataBridgeEventStreamService(DataBridgeStreamStore dataBridgeStreamStore) {
         WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(null);
@@ -145,7 +145,7 @@ public class WSO2EventSourceDS {
      * This bind method will be called when DataBridgeReceiverService OSGi service is registered.
      *
      * @param dataBridgeReceiverService The DataBridgeReceiverService instance registered by databridge
-     *                                    as an OSGi service
+     *                                  as an OSGi service
      */
     @Reference(
             name = "databridge.receiver.service",
@@ -166,7 +166,7 @@ public class WSO2EventSourceDS {
      * This is the unbind method which gets called at the un-registration of DataBridgeReceiverService OSGi service.
      *
      * @param dataBridgeReceiverService The DataBridgeReceiverService instance registered by databridge
-     *                                    as an OSGi service
+     *                                  as an OSGi service
      */
     protected void unsetDataBridgeReceiverService(DataBridgeReceiverService dataBridgeReceiverService) {
         WSO2EventSourceRegistrationManager.setDataBridgeStreamStore(null);

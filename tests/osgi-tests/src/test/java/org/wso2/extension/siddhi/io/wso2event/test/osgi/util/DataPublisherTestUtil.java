@@ -24,8 +24,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class DataPublisherTestUtil {
-    private static final Logger LOGGER = Logger.getLogger(DataPublisherTestUtil.class);
     public static final String LOCAL_HOST = "localhost";
+    private static final Logger LOGGER = Logger.getLogger(DataPublisherTestUtil.class);
 
     public static void setCarbonHome() {
         Path carbonHome = Paths.get("");

@@ -24,9 +24,6 @@ package org.wso2.extension.siddhi.io.wso2event.sink;
  */
 public class WSO2EventSinkConstants {
 
-    private WSO2EventSinkConstants() {
-    }
-
     static final String WSO2EVENT_SINK_AUTHENTICATION_URL = "auth.url";
     static final String WSO2EVENT_SINK_URL = "url";
     static final String WSO2EVENT_SINK_USERNAME = "username";
@@ -37,5 +34,7 @@ public class WSO2EventSinkConstants {
     static final String DEFAULT_PUBLISHER_MODE = "non-blocking";
     static final String DEFAULT_PUBLISHER_PROTOCOL = "thrift";
     static final String SOURCE_STREAM_ID = "wso2.stream.id";
+    private WSO2EventSinkConstants() {
+    }
 
 }

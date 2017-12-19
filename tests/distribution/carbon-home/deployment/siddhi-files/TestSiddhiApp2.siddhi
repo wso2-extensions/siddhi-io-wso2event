@@ -1,0 +1,9 @@
+@App:name('TestSiddhiApp2')
+@source(type='wso2event',  @map(type='wso2event'))
+define stream BarStream (meta_name string, symbol string, price double, volume int, max double, min double);
+
+from BarStream
+select *
+insert into OutStream;
+
+
