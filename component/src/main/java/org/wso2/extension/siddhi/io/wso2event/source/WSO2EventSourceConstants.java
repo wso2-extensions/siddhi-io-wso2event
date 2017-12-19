@@ -24,8 +24,8 @@ package org.wso2.extension.siddhi.io.wso2event.source;
  */
 public class WSO2EventSourceConstants {
 
+    static final String SOURCE_STREAM_ID = "wso2.stream.id";
+
     private WSO2EventSourceConstants() {
     }
-
-    static final String SOURCE_STREAM_ID = "wso2.stream.id";
 }

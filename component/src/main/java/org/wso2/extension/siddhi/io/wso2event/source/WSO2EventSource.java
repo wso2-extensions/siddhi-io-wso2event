@@ -48,10 +48,10 @@ import java.util.Map;
                         "Define stream Foo (symbol string, price float, volume long);",
                 description = "As defined in above query events are received to stream id that defined in source."),
         parameters = {
-        @Parameter(name = "wso2.stream.id", description = "Stream Id to consume events. If stream id is not defined, " +
-                "it uses the respective siddhi stream name with version 1.0.0  " +
-                "e.g., `org.wso2.stream.bar.stream:1.0.0`", defaultValue = "siddhi.stream.name:1.0.0",
-                type = {DataType.STRING})
+                @Parameter(name = "wso2.stream.id", description = "Stream Id to consume events. If stream id is not " +
+                        "defined, it uses the respective siddhi stream name with version 1.0.0  " +
+                        "e.g., `org.wso2.stream.bar.stream:1.0.0`", defaultValue = "siddhi.stream.name:1.0.0",
+                        type = {DataType.STRING})
         }
 )
 public class WSO2EventSource extends Source {
