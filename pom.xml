@@ -29,7 +29,7 @@
 
     <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
     <artifactId>siddhi-io-wso2event-parent</artifactId>
-    <version>4.0.9-SNAPSHOT</version>
+    <version>4.0.10-SNAPSHOT</version>
     <name>Siddhi IO WSO2Event Extensions</name>
 
     <modules>
@@ -38,12 +38,14 @@
     </modules>
 
     <properties>
-        <siddhi.io.wso2event.version>4.0.9-SNAPSHOT</siddhi.io.wso2event.version>
-        <siddhi.version>4.0.1</siddhi.version>
+
+        <siddhi.io.wso2event.version>4.0.10-SNAPSHOT</siddhi.io.wso2event.version>
+        <siddhi.version>4.0.4</siddhi.version>
         <carbon.analytics.version>2.0.226</carbon.analytics.version>
-        <siddhi.map.wso2event.version>4.0.7</siddhi.map.wso2event.version>
-        <carbon.analytics-common.version>6.0.44</carbon.analytics-common.version>
+        <siddhi.map.wso2event.version>4.0.10</siddhi.map.wso2event.version>
+        <carbon.analytics-common.version>6.0.48</carbon.analytics-common.version>
         <carbon.kernel.version>5.2.6</carbon.kernel.version>
+
         <log4j.version>1.2.17.wso2v1</log4j.version>
         <commons.logging.version>1.2</commons.logging.version>
         <carbon.utils.version>2.0.4</carbon.utils.version>
