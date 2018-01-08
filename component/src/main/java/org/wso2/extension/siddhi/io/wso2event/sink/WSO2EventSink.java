@@ -48,42 +48,57 @@ import java.util.Map;
         namespace = "sink",
         description = "The WSO2Event source pushes wso2events via TCP (databridge) in `wso2event` format. " +
                 "You can send wso2events through `Thrift` or `Binary` protocols.",
+        parameters = {
+                @Parameter(name = "wso2.stream.id",
+                          description = "Stream Id to use when publishing events. If " +
+                          "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0." +
+                          "e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
+                          "then the default value is `org.wso2.stream.bar.stream:1.0.0`.",
+                          defaultValue = "the defined stream ID:1.0.0",
+                          type = {DataType.STRING},
+                          optional = true),
+                @Parameter(name = "url",
+                          description = "The URL to which the outgoing events published via " +
+                          "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
+                          type = {DataType.STRING}),
+                @Parameter(name = "auth.url",
+                          description = "The Thrift/Binary server endpoint url which used fot " +
+                          "authentication purposes. It is not mandatory property. If this property is not provided " +
+                          "then tcp-port+100 used for port in auth.url. " +
+                          "e.g., `ssl://localhost:7711`",
+                          type = {DataType.STRING},
+                          optional = true,
+                          defaultValue = "ssl://localhost:<tcp-port> + 100"),
+                @Parameter(name = "username",
+                          description = "The username is used for authentication flow before " +
+                          "publishing events" +
+                          "e.g., `admin`",
+                          type = {DataType.STRING}),
+                @Parameter(name = "password",
+                          description = "The password is used for authentication flow before " +
+                          "publishing events" + "e.g., `admin`",
+                          type = {DataType.STRING}),
+                @Parameter(name = "protocol",
+                          description = "There are two protocols that we can use to publish " +
+                          "events through data bridge.Either, we can use thrift or binary. Default value is Thrift" +
+                           "e.g., `thrift`",
+                          type = {DataType.STRING},
+                          optional = true,
+                          defaultValue = WSO2EventSinkConstants.DEFAULT_PUBLISHER_PROTOCOL),
+                @Parameter(name = "mode",
+                          description = "Property which decides whether to publish events in " +
+                          "synchronous or asynchronous mode. Default is non-blocking mode." +
+                          "e.g., `blocking`",
+                          type = {DataType.STRING},
+                          optional = true,
+                          defaultValue = WSO2EventSinkConstants.DEFAULT_PUBLISHER_MODE),
+        },
         examples = @Example(syntax = "@sink(type='wso2event', wso2.stream.id='fooStream:1.0.0'," +
                 " url=\"tcp://localhost:7611\", auth.url=\"ssl://localhost:7711\", protocol=\"thrift\", " +
                 "username=\"admin\", password=\"admin\", " +
                 "mode=\"non-blocking\" , @map(type='wso2event'))\n" +
                 "Define stream barStream(system string, price float, volume long);",
-                description = "As defined in above query events are pushed to destination that defined."),
-        parameters = {
-                @Parameter(name = "wso2.stream.id", description = "Stream Id to use when publishing events. If " +
-                        "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0 ." +
-                        "e.g., `org.wso2.stream.bar.stream:1.0.0`", defaultValue = "siddhi.stream.name:1.0.0",
-                        type = {DataType.STRING}, optional = true),
-                @Parameter(name = "url", description = "The URL to which the outgoing events published via " +
-                        "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
-                        type = {DataType.STRING}),
-                @Parameter(name = "auth.url", description = "The Thrift/Binary server endpoint url which used fot " +
-                        "authentication purposes. It is not mandatory property. If this property is not provided " +
-                        "then tcp-port+100 used for port in auth.url. " +
-                        "e.g., `ssl://localhost:7711`", type = {DataType.STRING}, optional = true,
-                        defaultValue = "ssl://localhost:<tcp-port> + 100"),
-                @Parameter(name = "username", description = "The username is used for authentication flow before " +
-                        "publishing events" +
-                        "e.g., `admin`", type = {DataType.STRING}),
-                @Parameter(name = "password", description = "The password is used for authentication flow before " +
-                        "publishing events" +
-                        "e.g., `admin`", type = {DataType.STRING}),
-                @Parameter(name = "protocol", description = "There are two protocols that we can use to publish " +
-                        "events through data bridge.Either, we can use thrift or binary. Default value is Thrift" +
-                        "e.g., `thrift`",
-                        type = {DataType.STRING}, optional = true, defaultValue = WSO2EventSinkConstants.
-                        DEFAULT_PUBLISHER_PROTOCOL),
-                @Parameter(name = "mode", description = "Property which decides whether to publish events in " +
-                        "synchronous or asynchronous mode. Default is non-blocking mode." +
-                        "e.g., `blocking`",
-                        type = {DataType.STRING}, optional = true, defaultValue = WSO2EventSinkConstants.
-                        DEFAULT_PUBLISHER_MODE)
-        }
+                description = "As defined in above query events are pushed to destination that defined.")
 )
 public class WSO2EventSink extends Sink {
 

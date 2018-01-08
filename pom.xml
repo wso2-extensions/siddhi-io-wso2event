@@ -614,6 +614,14 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <preparationGoals>clean install -Pdocumentation-deploy</preparationGoals>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -621,14 +629,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <configuration>
-                        <preparationGoals>clean install -Pdocumentation-deploy</preparationGoals>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.wso2.carbon.maven</groupId>

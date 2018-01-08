@@ -1,31 +1,68 @@
-# WSO2 Extension Siddhi IO WSO2Event
+siddhi-io-wso2event
+======================================
 
-## Siddhi WSO2Event Source
-WSO2Event source is used to receive events in the WSO2Event format via Thrift or binary protocols. By default it uses the following ports to retrieve events.
+The **siddhi-io-wso2event extension** is an extension to <a target="_blank" href="https://wso2.github.io/siddhi">Siddhi</a> that receives and publishes events in the WSO2Event format via Thrift or Binary protocols.
 
-For Thrift:
+Find some useful links below:
+
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event">Source code</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event/releases">Releases</a>
+* <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event/issues">Issue tracker</a>
+
+## Latest API Docs 
+
+
+## How to use 
+
+**Using the extension in <a target="_blank" href="https://github.com/wso2/product-sp">WSO2 Stream Processor</a>**
+
+* You can use this extension in the latest <a target="_blank" href="https://github.com/wso2/product-sp/releases">WSO2 Stream Processor</a> that is a part of <a target="_blank" href="http://wso2.com/analytics?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">WSO2 Analytics</a> offering, with editor, debugger and simulation support. 
+
+* This extension is shipped by default with WSO2 Stream Processor, if you wish to use an alternative version of this extension you can replace the component <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event/releases">jar</a> that can be found in the `<STREAM_PROCESSOR_HOME>/lib` directory.
+
+**Using the extension as a <a target="_blank" href="https://wso2.github.io/siddhi/documentation/running-as-a-java-library">java library</a>**
+
+* This extension can be added as a maven dependency along with other Siddhi dependencies to your project.
+
+```
+     <dependency>
+        <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+        <artifactId>siddhi-io-wso2event</artifactId>
+        <version>x.x.x</version>
+     </dependency>
+```
+
+## Jenkins Build Status
+
+---
+
+|  Branch | Build Status |
+| :------ |:------------ | 
+| master  | [![Build Status](https://wso2.org/jenkins/job/siddhi/job/siddhi-io-wso2event/badge/icon)](https://wso2.org/jenkins/job/siddhi/job/siddhi-io-wso2event/) |
+
+---
+
+## Features
+
+
+## How to Contribute
  
- - TCP port:7611 
- - SSL port:7711
+  * Please report issues at <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event/issues">GitHub Issue Tracker</a>.
+  
+  * Send your contributions as pull requests to <a target="_blank" href="https://github.com/wso2-extensions/siddhi-io-wso2event/tree/master">master branch</a>. 
 
-For Binary: 
+## Contact us 
+
+ * Post your questions with the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag in <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a>. 
  
- - TCP port:9611 
- - SSL port:9711
+ * Siddhi developers can be contacted via the mailing lists:
+ 
+    Developers List   : [dev@wso2.org](mailto:dev@wso2.org)
+    
+    Architecture List : [architecture@wso2.org](mailto:architecture@wso2.org)
+ 
+## Support 
 
-Use the tcp://HOSTNAME:PORT  and  ssl://HOSTNAME:PORT URLs to send events to the server as follows.
+* We are committed to ensuring support for this extension in production. Our unique approach ensures that all support leverages our open development methodology and is provided by the very same engineers who build the technology. 
 
-Use the following format for load-balancing: 
-{tcp://HOSTNAME:PORT,tcp://hostname:PORT, ...}
-
-Use the following format for failover:  
-{tcp://HOSTNAME:PORT|tcp://hostname:PORT| ...}
-
-Use the following format to send messages to more than one cluster of endpoints (cluster is defined using "{}") : 
-{tcp://HOSTNAME:PORT|tcp://hostname:PORT| ...},{tcp://HOSTNAME:PORT} 
-
-In the above format, the event is delivered to one endpoint on the first cluster of endpoints in a failover manner. Also, the same message is delivered to the endpoint defined in the second cluster.
-
-## Siddhi WSO2Event Sink
-
-WSO2Event source handles WSO2 events. It sends WSO2 events over Thrift using TCP, SSL/ TCP, HTTP, and HTTPS protocols to any external server, which can receive them.
+* For more details and to take advantage of this unique opportunity contact us via <a target="_blank" href="http://wso2.com/support?utm_source=gitanalytics&utm_campaign=gitanalytics_Jul17">http://wso2.com/support/</a>. 
