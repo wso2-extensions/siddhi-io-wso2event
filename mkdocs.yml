@@ -16,6 +16,11 @@ pages:
 - Api:
   - 4.0.1-SNAPSHOT: api/4.0.1-SNAPSHOT.md
 - API Docs:
+  - 4.0.10: api/4.0.10.md
+  - 4.0.9: api/4.0.9.md
+  - 4.0.8: api/4.0.8.md
+  - 4.0.7: api/4.0.7.md
+  - 4.0.6: api/4.0.6.md
   - 4.0.5: api/4.0.5.md
   - 4.0.4: api/4.0.4.md
   - 4.0.3: api/4.0.3.md
