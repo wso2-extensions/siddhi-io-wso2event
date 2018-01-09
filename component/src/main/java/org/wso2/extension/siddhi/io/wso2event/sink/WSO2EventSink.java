@@ -51,10 +51,10 @@ import java.util.Map;
         parameters = {
                 @Parameter(name = "wso2.stream.id",
                           description = "Stream Id to use when publishing events. If " +
-                          "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0." +
+                          "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0.",
+                          defaultValue = "the defined stream id:1.0.0\n" +
                           "e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
-                          "then the default value is `org.wso2.stream.bar.stream:1.0.0`.",
-                          defaultValue = "the defined stream ID:1.0.0",
+                          "then the value is `org.wso2.stream.bar.stream:1.0.0`.",
                           type = {DataType.STRING},
                           optional = true),
                 @Parameter(name = "url",
@@ -62,13 +62,14 @@ import java.util.Map;
                           "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
                           type = {DataType.STRING}),
                 @Parameter(name = "auth.url",
-                          description = "The Thrift/Binary server endpoint url which used fot " +
+                          description = "The Thrift/Binary server endpoint url which used for " +
                           "authentication purposes. It is not mandatory property. If this property is not provided " +
-                          "then tcp-port+100 used for port in auth.url. " +
-                          "e.g., `ssl://localhost:7711`",
+                          "then tcp-port+100 used for port in auth.url.",
                           type = {DataType.STRING},
                           optional = true,
-                          defaultValue = "ssl://localhost:<tcp-port> + 100"),
+                          defaultValue = "ssl://localhost:<tcp-port> + 100\n" +
+                          "e.g., if the tcp port is 7611, then the value is `ssl://localhost:7711`"
+                ),
                 @Parameter(name = "username",
                           description = "The username is used for authentication flow before " +
                           "publishing events" +
