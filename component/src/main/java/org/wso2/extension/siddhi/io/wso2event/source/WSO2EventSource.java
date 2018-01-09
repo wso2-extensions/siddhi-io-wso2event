@@ -43,16 +43,19 @@ import java.util.Map;
         namespace = "source",
         description = "The WSO2Event source receives wso2events via TCP (databridge) in `wso2event` format. " +
                 "You can receive wso2events through `Thrift` or `Binary` protocols.",
-        examples = @Example(syntax =
-                "@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event'))\n" +
-                        "Define stream Foo (symbol string, price float, volume long);",
-                description = "As defined in above query events are received to stream id that defined in source."),
         parameters = {
-                @Parameter(name = "wso2.stream.id", description = "Stream Id to consume events. If stream id is not " +
-                        "defined, it uses the respective siddhi stream name with version 1.0.0  " +
-                        "e.g., `org.wso2.stream.bar.stream:1.0.0`", defaultValue = "siddhi.stream.name:1.0.0",
+                @Parameter(name = "wso2.stream.id",
+                        description = "Stream Id to consume events. If stream id is not " +
+                        "defined, it uses the respective siddhi stream definition with version 1.0.0.\n" +
+                        "e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
+                        "then the default value is `org.wso2.stream.bar.stream:1.0.0`.",
+                        defaultValue = "the defined stream id:1.0.0\n",
                         type = {DataType.STRING})
-        }
+        },
+        examples = @Example(syntax =
+        "@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event'))\n" +
+                "Define stream Foo (symbol string, price float, volume long);",
+        description = "As defined in above query events are received to stream id that defined in source.")
 )
 public class WSO2EventSource extends Source {
 

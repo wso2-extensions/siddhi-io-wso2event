@@ -1,4 +1,4 @@
-site_name: Siddhi-IO-WSO2Event
+site_name: Siddhi-IO-Wso2event
 extra_css:
 - stylesheets/extra.css
 extra_javascript:
@@ -9,12 +9,11 @@ extra:
   palette:
     primary: teal
     accent: teal
+google_analytics:
+- UA-103065-28
+- auto
 pages:
-- Welcome to WSO2 Siddhi IO WSO2Event: index.md
-- About:
-  - License: about/license.md
-- Api:
-  - 4.0.1-SNAPSHOT: api/4.0.1-SNAPSHOT.md
+- Welcome to WSO2 Siddhi IO Wso2event: index.md
 - API Docs:
   - 4.0.10: api/4.0.10.md
   - 4.0.9: api/4.0.9.md
@@ -26,4 +25,5 @@ pages:
   - 4.0.3: api/4.0.3.md
   - 4.0.2: api/4.0.2.md
   - latest: api/latest.md
+- License: license.md
 theme: material
