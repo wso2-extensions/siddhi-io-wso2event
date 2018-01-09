@@ -52,44 +52,41 @@ import java.util.Map;
                 @Parameter(name = "wso2.stream.id",
                           description = "Stream Id to use when publishing events. If " +
                           "stream id is not defined, it uses the respective siddhi stream name with version 1.0.0.",
-                          defaultValue = "the defined stream id:1.0.0\n" +
-                          "e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
-                          "then the value is `org.wso2.stream.bar.stream:1.0.0`.",
+                          defaultValue = "`the defined stream id:1.0.0`. \n" +
+                          "(e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
+                          "then the value is `org.wso2.stream.bar.stream:1.0.0`.)",
                           type = {DataType.STRING},
                           optional = true),
                 @Parameter(name = "url",
                           description = "The URL to which the outgoing events published via " +
-                          "TCP over Thrift or Binary. e.g., `tcp://localhost:7611`",
+                          "TCP over Thrift or Binary. (e.g., `tcp://localhost:7611`)",
                           type = {DataType.STRING}),
                 @Parameter(name = "auth.url",
                           description = "The Thrift/Binary server endpoint url which used for " +
-                          "authentication purposes. It is not mandatory property. If this property is not provided " +
-                          "then tcp-port+100 used for port in auth.url.",
+                          "authentication purposes.",
                           type = {DataType.STRING},
                           optional = true,
-                          defaultValue = "ssl://localhost:<tcp-port> + 100\n" +
-                          "e.g., if the tcp port is 7611, then the value is `ssl://localhost:7711`"
+                          defaultValue = "`ssl://localhost:<tcp-port> + 100` \n " +
+                          "(e.g., if the tcp port is 7611, then the value is `ssl://localhost:7711`)"
                 ),
                 @Parameter(name = "username",
                           description = "The username is used for authentication flow before " +
-                          "publishing events" +
-                          "e.g., `admin`",
+                          "publishing events." +
+                          " e.g., `admin`",
                           type = {DataType.STRING}),
                 @Parameter(name = "password",
                           description = "The password is used for authentication flow before " +
-                          "publishing events" + "e.g., `admin`",
+                          "publishing events." + " e.g., `admin`",
                           type = {DataType.STRING}),
                 @Parameter(name = "protocol",
                           description = "There are two protocols that we can use to publish " +
-                          "events through data bridge.Either, we can use thrift or binary. Default value is Thrift" +
-                           "e.g., `thrift`",
+                          "events through data bridge. Either, we can use thrift or binary.",
                           type = {DataType.STRING},
                           optional = true,
                           defaultValue = WSO2EventSinkConstants.DEFAULT_PUBLISHER_PROTOCOL),
                 @Parameter(name = "mode",
                           description = "Property which decides whether to publish events in " +
-                          "synchronous or asynchronous mode. Default is non-blocking mode." +
-                          "e.g., `blocking`",
+                          "synchronous or asynchronous mode. It can be either `blocking` or `non-blocking` mode.",
                           type = {DataType.STRING},
                           optional = true,
                           defaultValue = WSO2EventSinkConstants.DEFAULT_PUBLISHER_MODE),
@@ -185,7 +182,7 @@ public class WSO2EventSink extends Sink {
             dataPublisher.publish(event);
         } else {
             if (!dataPublisher.tryPublish(event, timeout)) {
-                LOGGER.error("Event dropped at WSO2Event sink in executionplan '" + siddhiAppName +
+                LOGGER.error("Event dropped at WSO2Event sink in siddhiApp '" + siddhiAppName +
                         " , dropping event: " + event);
             }
         }
