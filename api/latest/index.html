@@ -183,6 +183,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../4.0.12/" title="4.0.12" class="md-nav__link">
+      4.0.12
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../4.0.11/" title="4.0.11" class="md-nav__link">
       4.0.11
     </a>
@@ -470,7 +482,7 @@
               
                 
                 
-                <h1 id="api-docs-v4011">API Docs - v4.0.11</h1>
+                <h1 id="api-docs-v4012">API Docs - v4.0.12</h1>
 <h2 id="sink">Sink</h2>
 <h3 id="wso2event-sink">wso2event <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a></em></h3>
 <p style="word-wrap: break-word">The WSO2Event source pushes wso2events via TCP (databridge) in <code>wso2event</code> format. You can send wso2events through <code>Thrift</code> or <code>Binary</code> protocols.</p>
@@ -491,15 +503,16 @@
     </tr>
     <tr>
         <td style="vertical-align: top">wso2.stream.id</td>
-        <td style="vertical-align: top; word-wrap: break-word">Stream Id to use when publishing events. If stream id is not defined, it uses the respective siddhi stream name with version 1.0.0.e.g.,if the stream definition is <code>org.wso2.stream.bar.stream</code>, then the default value is <code>org.wso2.stream.bar.stream:1.0.0</code>.</td>
-        <td style="vertical-align: top">the defined stream ID:1.0.0</td>
+        <td style="vertical-align: top; word-wrap: break-word">Stream Id to use when publishing events. If stream id is not defined, it uses the respective siddhi stream name with version 1.0.0.</td>
+        <td style="vertical-align: top"><code>the defined stream id:1.0.0</code>. 
+(e.g.,if the stream definition is <code>org.wso2.stream.bar.stream</code>, then the value is <code>org.wso2.stream.bar.stream:1.0.0</code>.)</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
         <td style="vertical-align: top">url</td>
-        <td style="vertical-align: top; word-wrap: break-word">The URL to which the outgoing events published via TCP over Thrift or Binary. e.g., <code>tcp://localhost:7611</code></td>
+        <td style="vertical-align: top; word-wrap: break-word">The URL to which the outgoing events published via TCP over Thrift or Binary. (e.g., <code>tcp://localhost:7611</code>)</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -507,15 +520,16 @@
     </tr>
     <tr>
         <td style="vertical-align: top">auth.url</td>
-        <td style="vertical-align: top; word-wrap: break-word">The Thrift/Binary server endpoint url which used fot authentication purposes. It is not mandatory property. If this property is not provided then tcp-port+100 used for port in auth.url. e.g., <code>ssl://localhost:7711</code></td>
-        <td style="vertical-align: top">ssl://localhost:<tcp-port> + 100</td>
+        <td style="vertical-align: top; word-wrap: break-word">The Thrift/Binary server endpoint url which used for authentication purposes.</td>
+        <td style="vertical-align: top"><code>ssl://localhost:&lt;tcp-port&gt; + 100</code> 
+ (e.g., if the tcp port is 7611, then the value is <code>ssl://localhost:7711</code>)</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
         <td style="vertical-align: top">username</td>
-        <td style="vertical-align: top; word-wrap: break-word">The username is used for authentication flow before publishing eventse.g., <code>admin</code></td>
+        <td style="vertical-align: top; word-wrap: break-word">The username is used for authentication flow before publishing events. e.g., <code>admin</code></td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -523,7 +537,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">password</td>
-        <td style="vertical-align: top; word-wrap: break-word">The password is used for authentication flow before publishing eventse.g., <code>admin</code></td>
+        <td style="vertical-align: top; word-wrap: break-word">The password is used for authentication flow before publishing events. e.g., <code>admin</code></td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -531,7 +545,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">protocol</td>
-        <td style="vertical-align: top; word-wrap: break-word">There are two protocols that we can use to publish events through data bridge.Either, we can use thrift or binary. Default value is Thrifte.g., <code>thrift</code></td>
+        <td style="vertical-align: top; word-wrap: break-word">There are two protocols that we can use to publish events through data bridge. Either, we can use thrift or binary.</td>
         <td style="vertical-align: top">thrift</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -539,7 +553,7 @@
     </tr>
     <tr>
         <td style="vertical-align: top">mode</td>
-        <td style="vertical-align: top; word-wrap: break-word">Property which decides whether to publish events in synchronous or asynchronous mode. Default is non-blocking mode.e.g., <code>blocking</code></td>
+        <td style="vertical-align: top; word-wrap: break-word">Property which decides whether to publish events in synchronous or asynchronous mode. It can be either <code>blocking</code> or <code>non-blocking</code> mode.</td>
         <td style="vertical-align: top">non-blocking</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">Yes</td>
@@ -574,9 +588,9 @@ Define stream barStream(system string, price float, volume long);
     </tr>
     <tr>
         <td style="vertical-align: top">wso2.stream.id</td>
-        <td style="vertical-align: top; word-wrap: break-word">Stream Id to consume events. If stream id is not defined, it uses the respective siddhi stream definition with version 1.0.0.<br>e.g.,if the stream definition is <code>org.wso2.stream.bar.stream</code>, then the default value is <code>org.wso2.stream.bar.stream:1.0.0</code>.</td>
-        <td style="vertical-align: top">the defined stream id:1.0.0
-</td>
+        <td style="vertical-align: top; word-wrap: break-word">Stream Id to consume events. If stream id is not defined, it uses the respective siddhi stream definition with version 1.0.0 <br></td>
+        <td style="vertical-align: top"><code>the defined stream id:1.0.0</code>. 
+(e.g. if the stream definition is <code>org.wso2.stream.bar.stream</code>, then the value is <code>org.wso2.stream.bar.stream:1.0.0</code>.)</td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
         <td style="vertical-align: top">No</td>
@@ -584,7 +598,7 @@ Define stream barStream(system string, price float, volume long);
 </table></p>
 <p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
 <span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
-<pre><code>@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event'))
+<pre><code>@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event')) 
 Define stream Foo (symbol string, price float, volume long);
 </code></pre>
 
