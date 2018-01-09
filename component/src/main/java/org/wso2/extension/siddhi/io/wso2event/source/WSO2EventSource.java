@@ -96,7 +96,7 @@ public class WSO2EventSource extends Source {
                 sourceStreamDefinition.setMetaData(streamDefinition.getMetaData());
                 sourceStreamDefinition.setCorrelationData(streamDefinition.getCorrelationData());
                 sourceStreamDefinition.setPayloadData(streamDefinition.getPayloadData());
-
+                streamDefinition = sourceStreamDefinition;
             } catch (MalformedStreamDefinitionException e) {
                 throw new ConnectionUnavailableException("Exception when generating the WSO2 stream definition", e);
             }
