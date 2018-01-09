@@ -46,14 +46,14 @@ import java.util.Map;
         parameters = {
                 @Parameter(name = "wso2.stream.id",
                         description = "Stream Id to consume events. If stream id is not " +
-                        "defined, it uses the respective siddhi stream definition with version 1.0.0.\n" +
-                        "e.g.,if the stream definition is `org.wso2.stream.bar.stream`, " +
-                        "then the default value is `org.wso2.stream.bar.stream:1.0.0`.",
-                        defaultValue = "the defined stream id:1.0.0\n",
+                        "defined, it uses the respective siddhi stream definition with version 1.0.0 \n",
+                        defaultValue = "`the defined stream id:1.0.0`. \n" +
+                        "(e.g. if the stream definition is `org.wso2.stream.bar.stream`, " +
+                        "then the value is `org.wso2.stream.bar.stream:1.0.0`.)",
                         type = {DataType.STRING})
         },
         examples = @Example(syntax =
-        "@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event'))\n" +
+        "@source(type='wso2event', wso2.stream.id='inputstream:1.0.0', @map(type='wso2event')) \n" +
                 "Define stream Foo (symbol string, price float, volume long);",
         description = "As defined in above query events are received to stream id that defined in source.")
 )
@@ -96,7 +96,7 @@ public class WSO2EventSource extends Source {
                 sourceStreamDefinition.setMetaData(streamDefinition.getMetaData());
                 sourceStreamDefinition.setCorrelationData(streamDefinition.getCorrelationData());
                 sourceStreamDefinition.setPayloadData(streamDefinition.getPayloadData());
-
+                streamDefinition = sourceStreamDefinition;
             } catch (MalformedStreamDefinitionException e) {
                 throw new ConnectionUnavailableException("Exception when generating the WSO2 stream definition", e);
             }

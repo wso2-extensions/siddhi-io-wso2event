@@ -65,10 +65,11 @@ public class WSO2EventSourceRegistrationManager {
     }
 
     static void unregisterEventConsumer(String streamId, SourceEventListener sourceEventListener) {
-
-        List<SourceEventListener> sourceEventListenerList = streamSpecificEventListenerMap.get(streamId);
-        if (sourceEventListenerList != null) {
-            sourceEventListenerList.remove(sourceEventListener);
+        if (streamId != null) {
+            List<SourceEventListener> sourceEventListenerList = streamSpecificEventListenerMap.get(streamId);
+            if (sourceEventListenerList != null) {
+                sourceEventListenerList.remove(sourceEventListener);
+            }
         }
     }
 
