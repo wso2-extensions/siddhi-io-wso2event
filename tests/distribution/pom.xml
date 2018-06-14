@@ -152,6 +152,11 @@
             <type>zip</type>
         </dependency>
         <dependency>
+            <groupId>org.wso2.carbon.uiserver</groupId>
+            <artifactId>org.wso2.carbon.uiserver.feature</artifactId>
+            <type>zip</type>
+        </dependency>
+        <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.pax.exam.feature</artifactId>
             <type>zip</type>
@@ -438,6 +443,10 @@
                                     <id>org.wso2.siddhi.feature</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.uiserver.feature</id>
+                                    <version>${carbon.uis.version}</version>
+                                </feature>
 
                                 <feature>
                                     <id>org.wso2.carbon.pax.exam.feature</id>
@@ -634,6 +643,10 @@
                                 <feature>
                                     <id>org.wso2.siddhi.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
+                                </feature>
+                                <feature>
+                                    <id>org.wso2.carbon.uiserver.feature</id>
+                                    <version>${carbon.uis.version}</version>
                                 </feature>
 
                                 <feature>
