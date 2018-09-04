@@ -11,7 +11,7 @@ Find some useful links below:
 
 ## Latest API Docs 
 
-Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.15">4.0.15</a>.
+Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.16">4.0.16</a>.
 
 ## How to use 
 
@@ -45,8 +45,8 @@ Latest API Docs is <a target="_blank" href="https://wso2-extensions.github.io/si
 
 ## Features
 
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.15/#wso2event-sink">wso2event</a> *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a>*<br><div style="padding-left: 1em;"><p>The WSO2Event source pushes wso2events via TCP (databridge) in <code>wso2event</code> format. You can send wso2events through <code>Thrift</code> or <code>Binary</code> protocols.</p></div>
-* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.15/#wso2event-source">wso2event</a> *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The WSO2Event source receives wso2events via TCP (databridge) in <code>wso2event</code> format. You can receive wso2events through <code>Thrift</code> or <code>Binary</code> protocols.</p></div>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.16/#wso2event-sink">wso2event</a> *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">(Sink)</a>*<br><div style="padding-left: 1em;"><p>The WSO2Event source pushes wso2events via TCP (databridge) in <code>wso2event</code> format. You can send wso2events through <code>Thrift</code> or <code>Binary</code> protocols.</p></div>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/api/4.0.16/#wso2event-source">wso2event</a> *<a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#source">(Source)</a>*<br><div style="padding-left: 1em;"><p>The WSO2Event source receives wso2events via TCP (databridge) in <code>wso2event</code> format. You can receive wso2events through <code>Thrift</code> or <code>Binary</code> protocols.</p></div>
 
 ## How to Contribute
  
