@@ -39,9 +39,9 @@
     <properties>
 
         <siddhi.io.wso2event.version>4.0.17-SNAPSHOT</siddhi.io.wso2event.version>
-        <siddhi.version>4.2.12</siddhi.version>
+        <siddhi.version>4.2.17</siddhi.version>
         <carbon.analytics.version>2.0.404</carbon.analytics.version>
-        <siddhi.map.wso2event.version>4.0.14</siddhi.map.wso2event.version>
+        <siddhi.map.wso2event.version>4.0.16</siddhi.map.wso2event.version>
         <carbon.analytics-common.version>6.0.66</carbon.analytics-common.version>
         <carbon.uis.version>0.19.5</carbon.uis.version>
         <carbon.kernel.version>5.2.6</carbon.kernel.version>
