@@ -78,11 +78,8 @@ public class WSO2EventSimpleFlowTestcase {
                 copyOSGiLibBundle(maven().artifactId("siddhi-io-wso2event").
                         groupId("org.wso2.extension.siddhi.io.wso2event")
                         .versionAsInProject()),
-                copyOSGiLibBundle(maven().artifactId("siddhi-map-wso2event").
-                        groupId("org.wso2.extension.siddhi.map.wso2event")
-                        .version("4.0.8")),
                 carbonDistribution(Paths.get("target", "wso2siddhi-io-wso2event-test-" +
-                        System.getProperty("siddhi.io.wso2.version")), "worker")
+                        System.getProperty("siddhi.io.wso2.version")), "server")
         };
     }
 
@@ -119,7 +116,7 @@ public class WSO2EventSimpleFlowTestcase {
             @Override
             public void receive(List<Event> list, Credentials credentials) {
                 for (Event event : list) {
-                    if (event.getStreamId().equalsIgnoreCase("BarStream:1.0.0")) {
+                    if (event.getStreamId().equalsIgnoreCase("FooStream:1.0.0")) {
                         actualEventCount.incrementAndGet();
                     }
                 }

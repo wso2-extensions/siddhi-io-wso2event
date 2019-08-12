@@ -18,9 +18,9 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
+import io.siddhi.core.stream.input.source.SourceEventListener;
 import org.wso2.carbon.databridge.core.DataBridgeStreamStore;
 import org.wso2.carbon.databridge.core.DataBridgeSubscriberService;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.util.ArrayList;
 import java.util.List;

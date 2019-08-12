@@ -18,7 +18,7 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
-import org.wso2.siddhi.core.stream.input.source.Source;
+import io.siddhi.core.stream.input.source.Source;
 
 import java.util.ArrayList;
 import java.util.List;
