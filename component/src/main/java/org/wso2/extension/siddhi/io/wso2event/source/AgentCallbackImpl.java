@@ -18,13 +18,13 @@
 
 package org.wso2.extension.siddhi.io.wso2event.source;
 
+import io.siddhi.core.stream.input.source.SourceEventListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.wso2.carbon.databridge.commons.Credentials;
 import org.wso2.carbon.databridge.commons.Event;
 import org.wso2.carbon.databridge.commons.StreamDefinition;
 import org.wso2.carbon.databridge.core.AgentCallback;
-import org.wso2.siddhi.core.stream.input.source.SourceEventListener;
 
 import java.util.List;
 import java.util.concurrent.locks.Condition;

@@ -19,7 +19,7 @@
     <parent>
         <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
-        <version>4.1.2-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -138,12 +138,12 @@
         <!-- Stream Processor related Features-->
         <dependency>
             <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.stream.processor.core.feature</artifactId>
+            <artifactId>org.wso2.carbon.streaming.integrator.core.feature</artifactId>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.stream.processor.common.feature</artifactId>
+            <artifactId>org.wso2.carbon.streaming.integrator.common.feature</artifactId>
             <type>zip</type>
         </dependency>
         <dependency>
@@ -213,7 +213,7 @@
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.stream.processor.statistics.feature</artifactId>
+            <artifactId>org.wso2.carbon.streaming.integrator.statistics.feature</artifactId>
             <type>zip</type>
         </dependency>
         <dependency>
@@ -223,17 +223,12 @@
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.siddhi.metrics.core.feature</artifactId>
+            <artifactId>org.wso2.carbon.si.metrics.core.feature</artifactId>
             <type>zip</type>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.analytics-common</groupId>
             <artifactId>org.wso2.carbon.analytics.permissions.feature</artifactId>
-            <type>zip</type>
-        </dependency>
-        <dependency>
-            <groupId>org.wso2.carbon.analytics</groupId>
-            <artifactId>org.wso2.carbon.sp.distributed.resource.core.feature</artifactId>
             <type>zip</type>
         </dependency>
     </dependencies>
@@ -276,6 +271,12 @@
                                     <groupId>org.awaitility</groupId>
                                     <artifactId>awaitility</artifactId>
                                     <version>${awaitility.version}</version>
+                                    <type>jar</type>
+                                </dependency>
+                                <dependency>
+                                    <groupId>org.wso2.extension.siddhi.map.wso2event</groupId>
+                                    <artifactId>siddhi-map-wso2event</artifactId>
+                                    <version>${siddhi.map.wso2event.version}</version>
                                     <type>jar</type>
                                 </dependency>
                             </artifactItems>
@@ -382,11 +383,7 @@
                                 </feature>
 
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.statistics.feature</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.sp.distributed.resource.core.feature</id>
+                                    <id>org.wso2.carbon.streaming.integrator.statistics.feature</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
@@ -394,7 +391,7 @@
                                     <version>${carbon.analytics-common.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.siddhi.metrics.core.feature</id>
+                                    <id>org.wso2.carbon.si.metrics.core.feature</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
 
@@ -432,11 +429,11 @@
 
                                 <!-- Stream Processor Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.core.feature</id>
+                                    <id>org.wso2.carbon.streaming.integrator.core.feature</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.common.feature</id>
+                                    <id>org.wso2.carbon.streaming.integrator.common.feature</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
@@ -496,7 +493,7 @@
                             <targetPath>
                                 file:${basedir}/target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2
                             </targetPath>
-                            <runtime>worker</runtime>
+                            <runtime>server</runtime>
                         </configuration>
                     </execution>
                     <execution>
@@ -506,7 +503,7 @@
                             <goal>install</goal>
                         </goals>
                         <configuration>
-                            <runtime>worker</runtime>
+                            <runtime>server</runtime>
                             <repositoryURL>file:${basedir}/target/p2-repo</repositoryURL>
                             <destination>${basedir}/target/wso2siddhi-io-wso2event-${siddhi.io.wso2event.version}/wso2
                             </destination>
@@ -595,11 +592,7 @@
 
 
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.statistics.feature.group</id>
-                                    <version>${carbon.analytics.version}</version>
-                                </feature>
-                                <feature>
-                                    <id>org.wso2.carbon.sp.distributed.resource.core.feature.group</id>
+                                    <id>org.wso2.carbon.streaming.integrator.statistics.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
@@ -607,7 +600,7 @@
                                     <version>${carbon.analytics-common.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.siddhi.metrics.core.feature.group</id>
+                                    <id>org.wso2.carbon.si.metrics.core.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
 
@@ -633,11 +626,11 @@
 
                                 <!-- Stream Processor Features -->
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.core.feature.group</id>
+                                    <id>org.wso2.carbon.streaming.integrator.core.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
-                                    <id>org.wso2.carbon.stream.processor.common.feature.group</id>
+                                    <id>org.wso2.carbon.streaming.integrator.common.feature.group</id>
                                     <version>${carbon.analytics.version}</version>
                                 </feature>
                                 <feature>
