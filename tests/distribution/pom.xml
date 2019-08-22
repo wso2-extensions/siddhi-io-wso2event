@@ -17,7 +17,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <parent>
-        <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+        <groupId>io.siddhi.extension.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
         <version>5.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -274,7 +274,7 @@
                                     <type>jar</type>
                                 </dependency>
                                 <dependency>
-                                    <groupId>org.wso2.extension.siddhi.map.wso2event</groupId>
+                                    <groupId>io.siddhi.extension.map.wso2event</groupId>
                                     <artifactId>siddhi-map-wso2event</artifactId>
                                     <version>${siddhi.map.wso2event.version}</version>
                                     <type>jar</type>

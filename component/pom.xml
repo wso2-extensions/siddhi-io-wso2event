@@ -20,9 +20,9 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+        <groupId>io.siddhi.extension.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-parent</artifactId>
-        <version>5.0.1-SNAPSHOT</version>
+        <version>5.1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -72,7 +72,7 @@
             <artifactId>org.wso2.carbon.databridge.agent</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.extension.siddhi.map.wso2event</groupId>
+            <groupId>io.siddhi.extension.map.wso2event</groupId>
             <artifactId>siddhi-map-wso2event</artifactId>
         </dependency>
     </dependencies>
@@ -110,7 +110,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.artifactId}</Bundle-Name>
                         <Export-Package>
-                            org.wso2.extension.siddhi.io.wso2event.*
+                            io.siddhi.extension.io.wso2event.*
                         </Export-Package>
                         <Import-Package>
                             io.siddhi.core.*;version="${siddhi.version.range}",

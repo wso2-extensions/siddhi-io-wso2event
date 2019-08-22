@@ -17,7 +17,7 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+        <groupId>io.siddhi.extension.io.wso2event</groupId>
         <artifactId>siddhi-io-wso2event-tests</artifactId>
         <version>5.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -117,11 +117,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+            <groupId>io.siddhi.extension.io.wso2event</groupId>
             <artifactId>siddhi-io-wso2event</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+            <groupId>io.siddhi.extension.io.wso2event</groupId>
             <artifactId>org.wso2.extension.io.wso2event.test.distribution</artifactId>
             <type>zip</type>
             <scope>test</scope>
@@ -171,7 +171,7 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>org.wso2.extension.siddhi.io.wso2event</groupId>
+                                            <groupId>io.siddhi.extension.io.wso2event</groupId>
                                             <artifactId>org.wso2.extension.io.wso2event.test.distribution</artifactId>
                                             <type>zip</type>
                                             <overWrite>true</overWrite>
@@ -205,7 +205,7 @@
                                 </org.ops4j.pax.url.mvn.localRepository>
                                 <jacoco-agent.destfile>${project.build.directory}/jacoco.exec</jacoco-agent.destfile>
                                 <org.wso2.carbon.test.default.distribution>
-                                    org.wso2.extension.siddhi.io.wso2event:org.wso2.extension.io.wso2event.test.distribution
+                                    io.siddhi.extension.io.wso2event:org.wso2.extension.io.wso2event.test.distribution
                                 </org.wso2.carbon.test.default.distribution>
                                 <org.ops4j.pax.logging.DefaultServiceLog.level>DEBUG
                                 </org.ops4j.pax.logging.DefaultServiceLog.level>
