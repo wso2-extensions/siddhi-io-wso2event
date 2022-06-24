@@ -32,7 +32,8 @@ import io.siddhi.core.util.snapshot.state.StateFactory;
 import io.siddhi.core.util.transport.DynamicOptions;
 import io.siddhi.core.util.transport.OptionHolder;
 import io.siddhi.query.api.definition.StreamDefinition;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wso2.carbon.databridge.agent.DataPublisher;
 import org.wso2.carbon.databridge.agent.exception.DataEndpointAgentConfigurationException;
 import org.wso2.carbon.databridge.agent.exception.DataEndpointAuthenticationException;
@@ -101,7 +102,7 @@ import org.wso2.carbon.databridge.commons.exception.TransportException;
 )
 public class WSO2EventSink extends Sink {
 
-    private static final Logger LOGGER = Logger.getLogger(WSO2EventSink.class);
+    private static final Logger LOGGER = LogManager.getLogger(WSO2EventSink.class);
     private DataPublisher dataPublisher;
     private String authUrl;
     private String url;

@@ -39,7 +39,7 @@
     <properties>
 
         <siddhi.io.wso2event.version>5.0.2-SNAPSHOT</siddhi.io.wso2event.version>
-        <siddhi.version>5.1.12</siddhi.version>
+        <siddhi.version>5.1.24</siddhi.version>
         <siddhi.version.range>[5.0.0,6.0.0)</siddhi.version.range>
         <carbon.analytics.version>3.0.26</carbon.analytics.version>
         <siddhi.map.wso2event.version>5.0.2</siddhi.map.wso2event.version>
@@ -47,7 +47,7 @@
         <carbon.uis.version>1.0.5</carbon.uis.version>
         <carbon.kernel.version>5.2.12</carbon.kernel.version>
 
-        <log4j.version>1.2.17.wso2v1</log4j.version>
+        <log4j.version>2.17.2</log4j.version>
         <commons.logging.version>1.2</commons.logging.version>
         <carbon.utils.version>2.0.4</carbon.utils.version>
         <carbon.datasources.version>1.1.8</carbon.datasources.version>
@@ -73,7 +73,7 @@
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <maven.paxexam.plugin.version>1.2.4</maven.paxexam.plugin.version>
         <mockito.version>1.9.0</mockito.version>
-        <pax.logging.log4j2.version>1.8.5</pax.logging.log4j2.version>
+        <pax.logging.log4j2.version>1.11.16</pax.logging.log4j2.version>
         <pax.exam.container.native.version>4.6.0</pax.exam.container.native.version>
         <pax.url.aether.version>1.6.0</pax.url.aether.version>
         <org.jacoco.ant.version>0.7.5.201505241946</org.jacoco.ant.version>
@@ -127,8 +127,8 @@
                 <version>${siddhi.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.log4j.wso2</groupId>
-                <artifactId>log4j</artifactId>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
                 <version>${log4j.version}</version>
                 <exclusions>
                     <exclusion>
