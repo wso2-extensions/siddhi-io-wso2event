@@ -16,7 +16,8 @@
 
 package org.wso2.extension.siddhi.io.wso2event.test.osgi.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.wso2.carbon.utils.Constants;
 
 import java.io.File;
@@ -25,7 +26,7 @@ import java.nio.file.Paths;
 
 public class DataPublisherTestUtil {
     public static final String LOCAL_HOST = "localhost";
-    private static final Logger LOGGER = Logger.getLogger(DataPublisherTestUtil.class);
+    private static final Logger LOGGER = LogManager.getLogger(DataPublisherTestUtil.class);
 
     public static void setCarbonHome() {
         Path carbonHome = Paths.get("");

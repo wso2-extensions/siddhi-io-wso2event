@@ -16,7 +16,8 @@
 
 package org.wso2.extension.siddhi.io.wso2event.test.osgi;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.awaitility.Awaitility;
 import org.awaitility.Duration;
 import org.ops4j.pax.exam.Configuration;
@@ -61,7 +62,7 @@ import static org.wso2.carbon.container.options.CarbonDistributionOption.copyOSG
 public class WSO2EventSimpleFlowTestcase {
 
     private static final String VERSION = "1.0.0";
-    private Logger log = Logger.getLogger(WSO2EventSimpleFlowTestcase.class);
+    private Logger log = LogManager.getLogger(WSO2EventSimpleFlowTestcase.class);
     private static AtomicInteger actualEventCount = new AtomicInteger(0);
     private String agentConfigFileName = "sync.data.agent.config.yaml";
 
