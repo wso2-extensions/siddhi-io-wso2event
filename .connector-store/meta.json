@@ -1,0 +1,13 @@
+{
+    "name": "wso2event",
+    "owner": "WSO2",
+    "category": "Siddhi IO",
+    "documentationUrl": "https://wso2-extensions.github.io/siddhi-io-wso2event/",
+    "description": "The siddhi-io-wso2event extension is an extension to Siddhi that receives and publishes events in the WSO2Event format via Thrift or Binary protocols.",
+    "status": "Active",
+    "labels": [
+        "wso2event",
+        "siddhi-io"
+    ],
+    "releases": []
+}
