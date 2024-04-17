@@ -9,5 +9,10 @@
         "wso2event",
         "siddhi-io"
     ],
-    "releases": []
+    "releases": [
+        {
+            "tagName": "4.1.1",
+            "products": []
+        }
+    ]
 }
